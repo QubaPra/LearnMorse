@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/navi">
 
         <RelativeLayout
-            android:id="@+id/nauka"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -69,6 +69,7 @@
             >
 
             <Button
+                android:id="@+id/nauka"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableBottom="@drawable/ic_learn"
@@ -85,7 +86,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/trening"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -93,6 +94,7 @@
             android:layout_marginLeft="8dp">
 
             <Button
+                android:id="@+id/trening"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableBottom="@drawable/ic_goal"
@@ -108,7 +110,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/test"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -117,6 +119,7 @@
 
 
                 <Button
+                    android:id="@+id/test"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_test"
@@ -131,7 +134,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/speed"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -139,6 +142,7 @@
             android:layout_marginLeft="10dp">
 
                 <Button
+                    android:id="@+id/speed"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_stopwatch"
@@ -153,7 +157,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/nadaj"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -161,6 +165,7 @@
             android:layout_marginRight="10dp">
 
                 <Button
+                    android:id="@+id/nadaj"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_send"
@@ -175,7 +180,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/odbierz"
+
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -183,6 +188,7 @@
             android:layout_marginLeft="10dp">
 
                 <Button
+                    android:id="@+id/odbierz"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_get"
