@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -50,7 +50,7 @@
     <GridLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="19dp"
+        android:layout_margin="21dp"
         android:layout_marginBottom="49dp"
         android:columnCount="2"
         android:rowCount="3"
@@ -59,63 +59,61 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/navi">
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/nauka"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginRight="10dp"
+            >
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableBottom="@drawable/ic_learn"
                 android:gravity="center|top"
-                android:paddingTop="19dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="19dp"
                 android:text="Nauka"
                 android:textColor="@color/white"
-                android:textSize="26sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 app:cornerRadius="19dp" />
 
 
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/trening"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginLeft="8dp">
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:drawableBottom="@drawable/ic_goal"
                 android:gravity="center|top"
-                android:paddingTop="19dp"
+                android:paddingTop="15dp"
                 android:paddingBottom="19dp"
                 android:text="Trening"
                 android:textColor="@color/white"
-                android:textSize="26sp"
+                android:textSize="23sp"
                 android:textStyle="bold"
                 app:cornerRadius="19dp" />
 
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/test"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginRight="10dp">
 
 
                 <Button
@@ -123,83 +121,80 @@
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_test"
                     android:gravity="center|top"
-                    android:paddingTop="19dp"
+                    android:paddingTop="15dp"
                     android:paddingBottom="19dp"
                     android:text="Test"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="23sp"
                     android:textStyle="bold"
                     app:cornerRadius="19dp" />
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/speed"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginLeft="10dp">
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_stopwatch"
                     android:gravity="center|top"
-                    android:paddingTop="19dp"
+                    android:paddingTop="15dp"
                     android:paddingBottom="19dp"
                     android:text="Speed"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="23sp"
                     android:textStyle="bold"
                     app:cornerRadius="19dp" />
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/nadaj"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginRight="10dp">
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_send"
                     android:gravity="center|top"
-                    android:paddingTop="19dp"
+                    android:paddingTop="15dp"
                     android:paddingBottom="19dp"
                     android:text="Nadaj"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="23sp"
                     android:textStyle="bold"
                     app:cornerRadius="19dp" />
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:id="@+id/odbierz"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/background">
+            android:layout_marginLeft="10dp">
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableBottom="@drawable/ic_get"
                     android:gravity="center|top"
-                    android:paddingTop="19dp"
+                    android:paddingTop="15dp"
                     android:paddingBottom="19dp"
                     android:text="Odbierz"
                     android:textColor="@color/white"
-                    android:textSize="26sp"
+                    android:textSize="23sp"
                     android:textStyle="bold"
                     app:cornerRadius="19dp" />
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
     </GridLayout>
 
