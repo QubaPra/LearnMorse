@@ -15,5 +15,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, TestActivity::class.java)
             startActivity(intent)
         }
+
+        val naukaButton: Button = findViewById(R.id.nauka)
+        naukaButton.setOnClickListener {
+            val intent = Intent(this, LearnActivity::class.java)
+            startActivity(intent)
+        }
+
+        val nadajButton: Button = findViewById(R.id.nadaj)
+        nadajButton.setOnClickListener {
+            val intent = Intent(this, SendChooseActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -12,6 +12,12 @@
         android:theme="@style/Theme.LearnMorse"
         tools:targetApi="31">
         <activity
+            android:name=".SendChooseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LearnActivity"
+            android:exported="false" />
+        <activity
             android:name=".TestActivity"
             android:exported="false" />
         <activity
