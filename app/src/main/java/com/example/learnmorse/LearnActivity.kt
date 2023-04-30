@@ -153,23 +153,24 @@ class LearnActivity : AppCompatActivity() {
                         mediaQueue.add(media)
                         playMediaQueue()
                     }
-                }
-                if (lastSignal == text.length) {
-                    buttonMinus.isClickable = false
-                    buttonDot.isClickable = false
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        lastLetter++
-                        if (lastLetter > 'Z') {
-                            lastLetter = 'A'
-                        }
-                        textViewRandom.text = lastLetter.toString()
-                        textViewResult.text = getMorseCode(lastLetter)
-                        lastSignal = 0
-                        buttonMinus.isClickable = true
-                        buttonDot.isClickable = true
-                    }, 1000)
+                    if (lastSignal == text.length) {
+                        buttonMinus.isClickable = false
+                        buttonDot.isClickable = false
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            lastLetter++
+                            if (lastLetter > 'Z') {
+                                lastLetter = 'A'
+                            }
+                            textViewRandom.text = lastLetter.toString()
+                            textViewResult.text = getMorseCode(lastLetter)
+                            lastSignal = 0
+                            buttonMinus.isClickable = true
+                            buttonDot.isClickable = true
+                        }, 1000)
 
+                    }
                 }
+
 
             }
 
