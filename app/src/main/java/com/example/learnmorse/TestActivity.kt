@@ -133,6 +133,7 @@ class TestActivity : AppCompatActivity() {
         super.onDestroy()
         mediaPlayer?.release()
         mediaPlayer = null
+        lastSignal = 0
     }
     private fun playMediaQueue() {
         if (mediaQueue.isNotEmpty() && mediaPlayer == null) {
