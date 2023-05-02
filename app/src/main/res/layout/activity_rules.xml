@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/navi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="30dp"
+            android:text="Info"
+            android:textColor="@color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="19dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:srcCompat="@drawable/ic_home" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/home"
+            app:layout_constraintTop_toTopOf="@+id/textView2"
+            app:srcCompat="@drawable/ic_settings" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbarThumbHorizontal="@color/main1"
+        android:scrollbarThumbVertical="@color/main1"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navi">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="21dp"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Czym jest afabet morsa?"
+                android:textColor="@color/accent1"
+                android:textSize="24sp" />
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jest to system telegraficzny, który wykorzystuje kombinacje krótkich i długich sygnałów dźwiękowych lub świetlnych w celu przekazywania informacji. Został wynaleziony przez Samuela Morse'a w 1837 roku i był powszechnie stosowany przez radioamatorów, statki i wojsko do komunikacji na dużych odległościach przed wynalezieniem telefonu."
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jak wygląda?"
+                android:textColor="@color/accent1"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alfabet morsa składa się z dwóch podstawowych elementów - kropek i kresek:"
+                android:textSize="18sp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="•         —"
+                android:textColor="@color/accent1"
+                android:textSize="50sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kropki reprezentowane są przez krótkie sygnały, a kreski przez długie sygnały. Każda litera alfabetu ma swoją unikalną kombinację kropek i kresek w alfabecie morsa."
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="W notacji stosuję się także kreskę pionową:"
+                android:textSize="18sp" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="|     ||      |||"
+                android:textColor="@color/accent1"
+                android:textSize="50sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pojedyncza kreska pionowa oznacza przerwę między literami."
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Podwójna kreska pionowa oznacza przerwę między wyrazami."
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Potrójna kreska pionowa oznacza przerwę między zdaniami."
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp"/>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Przykład"
+                android:textColor="@color/accent1"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SOS w alfabecie morsa wygląda następująco:"
+                android:textSize="18sp" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="S             O            S"
+                android:textColor="@color/accent1"
+                android:textSize="35sp" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="• • • | — — — | • • •"
+
+                android:textSize="35sp" />
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spis liter"
+                android:textColor="@color/accent1"
+                android:textSize="24sp"
+                android:layout_marginBottom="12dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A • —\nB — • • •\nC — • — •\nD — • •\nE •\nF • • — •\nG — — •\nH • • • •"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/textView4"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="I • •\nJ • — — —\nK — • —\nL • — • •\nM — —\nN — •\nO — — —\nP • — — •"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/textView6"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textView5" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R • — •\nS • • •\nT —\nU • • —\nW • — —\nY — • — —\nZ — — • •"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textView4" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

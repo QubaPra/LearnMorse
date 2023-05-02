@@ -39,5 +39,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SpeedActivity::class.java)
             startActivity(intent)
         }
+
+        val zasadyButton: Button = findViewById(R.id.zasady)
+        zasadyButton.setOnClickListener {
+            val intent = Intent(this, RulesActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
