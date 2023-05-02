@@ -74,7 +74,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
-        app:srcCompat="@drawable/ic_unmute" />
+        />
 
     <TextView
         android:id="@+id/textView"
