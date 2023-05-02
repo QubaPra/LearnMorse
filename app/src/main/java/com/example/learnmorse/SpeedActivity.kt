@@ -46,6 +46,11 @@ class SpeedActivity : AppCompatActivity() {
 
         timer()
 
+        if (countdownTextView.text == "Koniec!") {
+            buttonMinus.isClickable = false
+            buttonDot.isClickable = false
+            layout.isClickable = false
+        }
 
         home.setOnClickListener {
             finish()

@@ -19,6 +19,7 @@ const val alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
 var last = 0
 var lastTrainSignal = 0
 var reps = 0
+var tries = 0
 var learnMode = true
 
 class TrainActivity : AppCompatActivity() {
@@ -185,9 +186,11 @@ class TrainActivity : AppCompatActivity() {
                     var color = 0
                     if (textViewResult.text[lastTrainSignal].toString() == "—") {
                         color = green
+
                     }
                     else {
                         color = red
+
                     }
 
                     val coloredText = SpannableString(text.substring(0, lastTrainSignal + 1))
@@ -281,6 +284,7 @@ class TrainActivity : AppCompatActivity() {
         val input = textViewResult.text.toString()
         if (input == getMorseCode(alphabet[last])) {
             textViewRandom.setTextColor(getColor(R.color.accent1))
+            tries = 0
             if (alphabet[last] >= 'Z') {
                 reps = 4
             }
@@ -290,7 +294,12 @@ class TrainActivity : AppCompatActivity() {
             }
         } else {
             textViewRandom.setTextColor(getColor(R.color.accent2))
-
+            tries++
+            if (tries > 1) {
+                last++
+                tries = 0
+                reps++
+            }
         }
         buttonMinus.isClickable = false
         buttonDot.isClickable = false

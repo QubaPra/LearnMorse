@@ -88,9 +88,9 @@
     <RelativeLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_margin="21dp"
-
+        android:layout_height="0dp"
+        android:layout_marginVertical="19dp"
+        android:layout_marginHorizontal="28dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -118,7 +118,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread_inside" />
 
                 <TextView
                     android:id="@+id/textview_result"
@@ -126,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textColor="@color/white"
-                    android:textSize="85sp"
+                    android:textSize="78sp"
                     app:layout_constraintBottom_toTopOf="@+id/space2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -150,11 +151,13 @@
     <RelativeLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="21dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/button_minus"
@@ -163,7 +166,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/space"
-            android:paddingTop="16dp"
+            android:paddingTop="9dp"
             android:text="—"
             android:textColor="@color/accent1"
             android:textSize="50sp"
@@ -182,7 +185,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/space"
-            android:paddingTop="16dp"
+            android:paddingTop="9dp"
             android:text="•"
             android:textColor="@color/accent1"
             android:textSize="50sp"
