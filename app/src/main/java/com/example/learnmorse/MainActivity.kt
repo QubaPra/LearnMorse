@@ -33,5 +33,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, TrainActivity::class.java)
             startActivity(intent)
         }
+
+        val speedButton: Button = findViewById(R.id.speed)
+        speedButton.setOnClickListener {
+            val intent = Intent(this, SpeedActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -1,11 +1,7 @@
 package com.example.learnmorse
 
 import android.content.Intent
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraManager
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView

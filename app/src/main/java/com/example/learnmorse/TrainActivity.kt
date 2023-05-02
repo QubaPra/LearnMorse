@@ -1,6 +1,5 @@
 package com.example.learnmorse
 
-import android.content.res.Configuration
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-var lastTrainLetter = 'A'
+const val alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
+var last = 0
 var lastTrainSignal = 0
 var reps = 0
 var learnMode = true
@@ -57,10 +57,10 @@ class TrainActivity : AppCompatActivity() {
 
         // Change text of textViewRandom and textViewResult to 'A' in Morse code
 
-        textViewRandom.text = lastTrainLetter.toString()
+        textViewRandom.text = alphabet[last].toString()
         if (learnMode) {
             textView.text = "Przepisz literę"
-            textViewResult.text = getMorseCode(lastTrainLetter)
+            textViewResult.text = getMorseCode(alphabet[last])
 
         } else {
             textView.text = "Odgadnij literę"
@@ -124,24 +124,25 @@ class TrainActivity : AppCompatActivity() {
                         buttonDot.isClickable = false
                         Handler(Looper.getMainLooper()).postDelayed({
                             reps++
+                            if (alphabet[last] >= 'Z') {
+                                last+=2
+                                reps = 4
+                            }
                             if (reps > 3) {
                                 learnMode = false
                                 textView.text = "Odgadnij literę"
                                 reps = 0
-                                lastTrainLetter-=3
-                                textViewRandom.text = lastTrainLetter.toString()
+                                last-=3
+                                textViewRandom.text = alphabet[last].toString()
                                 textViewResult.text = ""
                                 lastTrainSignal = 0
                                 buttonMinus.isClickable = true
                                 buttonDot.isClickable = true
                             }
                             else {
-                                lastTrainLetter++
-                                if (lastTrainLetter > 'Z') {
-                                    lastTrainLetter = 'A'
-                                }
-                                textViewRandom.text = lastTrainLetter.toString()
-                                textViewResult.text = getMorseCode(lastTrainLetter)
+                                last++
+                                textViewRandom.text = alphabet[last].toString()
+                                textViewResult.text = getMorseCode(alphabet[last])
                                 lastTrainSignal = 0
                                 buttonMinus.isClickable = true
                                 buttonDot.isClickable = true
@@ -219,24 +220,26 @@ class TrainActivity : AppCompatActivity() {
                             buttonDot.isClickable = false
                             Handler(Looper.getMainLooper()).postDelayed({
                                 reps++
-                                if (reps > 3) {
+                                if (alphabet[last] > 'Z') {
+                                    last+=2
+                                    reps = 4
+                                }
+                                else if (reps > 3) {
                                     learnMode = false
                                     textView.text = "Odgadnij literę"
                                     reps = 0
-                                    lastTrainLetter-=3
-                                    textViewRandom.text = lastTrainLetter.toString()
+                                    last-=3
+                                    textViewRandom.text = alphabet[last].toString()
                                     textViewResult.text = ""
                                     lastTrainSignal = 0
                                     buttonMinus.isClickable = true
                                     buttonDot.isClickable = true
                                 }
                                 else {
-                                    lastTrainLetter++
-                                    if (lastTrainLetter > 'Z') {
-                                        lastTrainLetter = 'A'
-                                    }
-                                    textViewRandom.text = lastTrainLetter.toString()
-                                    textViewResult.text = getMorseCode(lastTrainLetter)
+                                    last++
+
+                                    textViewRandom.text = alphabet[last].toString()
+                                    textViewResult.text = getMorseCode(alphabet[last])
                                     lastTrainSignal = 0
                                     buttonMinus.isClickable = true
                                     buttonDot.isClickable = true
@@ -276,10 +279,15 @@ class TrainActivity : AppCompatActivity() {
 
     private fun checkResult() {
         val input = textViewResult.text.toString()
-        if (input == getMorseCode(lastTrainLetter)) {
+        if (input == getMorseCode(alphabet[last])) {
             textViewRandom.setTextColor(getColor(R.color.accent1))
-            lastTrainLetter++
-            reps++
+            if (alphabet[last] >= 'Z') {
+                reps = 4
+            }
+            else {
+                last++
+                reps++
+            }
         } else {
             textViewRandom.setTextColor(getColor(R.color.accent2))
 
@@ -293,16 +301,16 @@ class TrainActivity : AppCompatActivity() {
                 learnMode = true
                 textView.text = "Przepisz literę"
                 reps = 0
-                if (lastTrainLetter > 'Z') {
-                    lastTrainLetter = 'A'
+                if (alphabet[last] >= 'Z') {
+                    last=0
                 }
-                textViewResult.text = getMorseCode(lastTrainLetter)
+                textViewResult.text = getMorseCode(alphabet[last])
                 lastTrainSignal = 0
             }
             else {
                 textViewResult.text = ""
             }
-            textViewRandom.text = lastTrainLetter.toString()
+            textViewRandom.text = alphabet[last].toString()
             textViewRandom.setTextColor(getColor(R.color.white))
             buttonMinus.isClickable = true
             buttonDot.isClickable = true
