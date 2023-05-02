@@ -15,21 +15,25 @@ class SendAutoActivity : AppCompatActivity() {
 
         val home = findViewById<ImageView>(R.id.home)
         home.setOnClickListener {
-            navigateUpTo(Intent(baseContext, MainActivity::class.java))
+            finish()
         }
 
         val buttonMinus = findViewById<Button>(R.id.button_minus)
         val buttonDot = findViewById<Button>(R.id.button_dot)
         val buttonSpace = findViewById<Button>(R.id.button_space)
         val textView = findViewById<TextView>(R.id.textview_result)
-        val buttonBack = findViewById<Button>(R.id.button_back)
+        val buttonBack = findViewById<Button>(R.id.button_backspace)
         val buttonStart = findViewById<Button>(R.id.button_start)
 
         buttonMinus.setOnClickListener {
-            textView.append("—")
+            if (textView.text.toString().substringAfterLast(" ").length<4) {
+                textView.append("—")
+            }
         }
         buttonDot.setOnClickListener {
-            textView.append("•")
+            if (textView.text.toString().substringAfterLast(" ").length<4) {
+                textView.append("•")
+            }
         }
         buttonSpace.setOnClickListener {
             var text = textView.text.toString()

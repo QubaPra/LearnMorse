@@ -14,7 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 
-var lastLetter = 'A'
+var lastLetter = 0
 var lastSignal = 0
 var isMuted = false
 
@@ -43,8 +43,8 @@ class LearnActivity : AppCompatActivity() {
         }
 
         // Change text of textViewRandom and textViewResult to 'A' in Morse code
-        textViewRandom.text = lastLetter.toString()
-        textViewResult.text = getMorseCode(lastLetter)
+        textViewRandom.text = alphabet[lastLetter].toString()
+        textViewResult.text = getMorseCode(alphabet[lastLetter])
 
         sound.setOnClickListener {
             if (isMuted) {
@@ -101,11 +101,11 @@ class LearnActivity : AppCompatActivity() {
                     buttonDot.isClickable = false
                     Handler(Looper.getMainLooper()).postDelayed({
                         lastLetter++
-                        if (lastLetter > 'Z') {
-                            lastLetter = 'A'
+                        if (alphabet[lastLetter] > 'Z') {
+                            lastLetter = 0
                         }
-                        textViewRandom.text = lastLetter.toString()
-                        textViewResult.text = getMorseCode(lastLetter)
+                        textViewRandom.text = alphabet[lastLetter].toString()
+                        textViewResult.text = getMorseCode(alphabet[lastLetter])
                         lastSignal = 0
                         buttonMinus.isClickable = true
                         buttonDot.isClickable = true
@@ -158,11 +158,11 @@ class LearnActivity : AppCompatActivity() {
                         buttonDot.isClickable = false
                         Handler(Looper.getMainLooper()).postDelayed({
                             lastLetter++
-                            if (lastLetter > 'Z') {
-                                lastLetter = 'A'
+                            if (alphabet[lastLetter] > 'Z') {
+                                lastLetter = 0
                             }
-                            textViewRandom.text = lastLetter.toString()
-                            textViewResult.text = getMorseCode(lastLetter)
+                            textViewRandom.text = alphabet[lastLetter].toString()
+                            textViewResult.text = getMorseCode(alphabet[lastLetter])
                             lastSignal = 0
                             buttonMinus.isClickable = true
                             buttonDot.isClickable = true

@@ -6,22 +6,22 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 
-class SendChooseActivity : AppCompatActivity() {
+class SpeedStartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_send_choose)
+        setContentView(R.layout.activity_speed_start)
 
         val home = findViewById<ImageView>(R.id.home)
         home.setOnClickListener {
             finish()
         }
-
-        val auto = findViewById<Button>(R.id.auto)
-        auto.setOnClickListener {
-            val intent = Intent(this, SendAutoActivity::class.java)
+        val start = findViewById<Button>(R.id.button)
+        start.setOnClickListener {
+            val intent = Intent(this, SpeedActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
+            finish()
         }
-
 
     }
 }

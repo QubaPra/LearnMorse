@@ -19,14 +19,14 @@ class SpeedActivity : AppCompatActivity() {
     private lateinit var layout: RelativeLayout
     private lateinit var home: ImageView
 
-    private var randomChar = ('A'..'Z').random()
+    private var randomChar = alphabet.random()
     private var morseCode = getMorseCode(randomChar)
 
     private lateinit var countdownTextView: TextView
     private lateinit var countDownTimer: CountDownTimer
     private var timeLeft: Long = 20000
-    private var addTimeAmount: Long = 1000
-    private var subtractTimeAmount: Long = 1000
+    private var addTimeAmount: Long = 1500
+    private var subtractTimeAmount: Long = 500
 
     private var result = 0
 
@@ -83,7 +83,7 @@ class SpeedActivity : AppCompatActivity() {
             textViewRandom.setTextColor(getColor(R.color.accent1))
             addTime()
             result++
-            textView.text = result.toString() + " pkt"
+            textView.text = "$result pkt"
         } else {
             textViewRandom.setTextColor(getColor(R.color.accent2))
             subtractTime()
@@ -93,7 +93,7 @@ class SpeedActivity : AppCompatActivity() {
         layout.isClickable = false
         Handler(Looper.getMainLooper()).postDelayed({
             textViewResult.text = ""
-            randomChar = ('A'..'Z').random()
+            randomChar = alphabet.random()
             textViewRandom.text = randomChar.toString()
 
             textViewRandom.setTextColor(getColor(R.color.white))
@@ -126,12 +126,12 @@ class SpeedActivity : AppCompatActivity() {
         timeLeft=(countdownTextView.text.toString().toDouble()*1000).toLong()
         timeLeft+= addTimeAmount
         countDownTimer.cancel()
-        if (timeLeft > 0) {
+        if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
             timer()
         }
         else {
-            timeLeft = 0
-            timer()
+            countdownTextView.text = "Koniec!"
+
         }
 
 
@@ -140,12 +140,11 @@ class SpeedActivity : AppCompatActivity() {
         timeLeft=(countdownTextView.text.toString().toDouble()*1000).toLong()
         timeLeft-= subtractTimeAmount
         countDownTimer.cancel()
-        if (timeLeft > 0) {
+        if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
             timer()
         }
         else {
-            timeLeft = 0
-            timer()
+            countdownTextView.text = "Koniec!"
         }
     }
 

@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         val nadajButton: Button = findViewById(R.id.nadaj)
         nadajButton.setOnClickListener {
-            val intent = Intent(this, SendChooseActivity::class.java)
+            val intent = Intent(this, SendAutoActivity::class.java)
             startActivity(intent)
         }
 
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         val speedButton: Button = findViewById(R.id.speed)
         speedButton.setOnClickListener {
-            val intent = Intent(this, SpeedActivity::class.java)
+            val intent = Intent(this, SpeedStartActivity::class.java)
             startActivity(intent)
         }
 

@@ -27,7 +27,7 @@ class TestActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private val mediaQueue: MutableList<MediaPlayer> = mutableListOf()
 
-    private var randomChar = ('A'..'Z').random()
+    private var randomChar = alphabet.random()
     private var morseCode = getMorseCode(randomChar)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +106,7 @@ class TestActivity : AppCompatActivity() {
         layout.isClickable = false
         Handler(Looper.getMainLooper()).postDelayed({
             textViewResult.text = ""
-            randomChar = ('A'..'Z').random()
+            randomChar = alphabet.random()
             textViewRandom.text = randomChar.toString()
             val configuration = resources.configuration
             val isDarkMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES

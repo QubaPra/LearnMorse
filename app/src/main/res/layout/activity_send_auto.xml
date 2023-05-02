@@ -148,7 +148,7 @@
 
             <Button
                 android:id="@+id/button_start"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:paddingTop="16dp"
                 android:text="Start!"
@@ -161,21 +161,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <Button
+            <RelativeLayout
                 android:id="@+id/button_back"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="16dp"
-                android:text="Back"
-                android:textColor="@color/accent1"
-                android:textSize="50sp"
-                app:cornerRadius="19dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/button_start"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/button_backspace"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    app:cornerRadius="19dp"
+                     />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_backspace" />
+
+
+
+            </RelativeLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
