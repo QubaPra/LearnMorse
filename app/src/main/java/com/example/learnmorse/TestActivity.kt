@@ -1,5 +1,6 @@
 package com.example.learnmorse
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -48,6 +49,14 @@ class TestActivity : AppCompatActivity() {
         }
 
         home.setOnClickListener {
+            finish()
+        }
+
+        val info = findViewById<ImageView>(R.id.info)
+        info.setOnClickListener {
+            val intent = Intent(this, TestInfoActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
             finish()
         }
 

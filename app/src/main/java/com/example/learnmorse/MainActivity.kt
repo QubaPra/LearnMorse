@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,14 @@ class MainActivity : AppCompatActivity() {
         zasadyButton.setOnClickListener {
             val intent = Intent(this, RulesActivity::class.java)
             startActivity(intent)
+        }
+
+        val settingsButton: ImageView = findViewById(R.id.settings)
+        settingsButton.setOnClickListener {
+            val intent = Intent(this, MainSettingsActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
         }
     }
 }

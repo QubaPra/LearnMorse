@@ -1,6 +1,7 @@
 package com.example.learnmorse
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
@@ -37,6 +38,13 @@ class SendAutoActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
+        val info = findViewById<ImageView>(R.id.info)
+        info.setOnClickListener {
+            val intent = Intent(this, SendInfoActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
 
         val home = findViewById<ImageView>(R.id.home)
         home.setOnClickListener {

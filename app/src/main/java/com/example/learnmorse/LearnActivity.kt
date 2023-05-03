@@ -1,5 +1,6 @@
 package com.example.learnmorse
 
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -36,6 +37,13 @@ class LearnActivity : AppCompatActivity() {
         val buttonMinus = findViewById<Button>(R.id.button_minus)
         val home = findViewById<ImageView>(R.id.home)
         val sound = findViewById<ImageView>(R.id.sound)
+        val info = findViewById<ImageView>(R.id.info)
+        info.setOnClickListener {
+            val intent = Intent(this, LearnInfoActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
         if (!isMuted) {
             sound.setImageResource(R.drawable.ic_unmute)
         } else {
@@ -58,6 +66,7 @@ class LearnActivity : AppCompatActivity() {
         home.setOnClickListener {
             finish()
         }
+
 
         buttonDot.setOnClickListener {
             val text = textViewResult.text

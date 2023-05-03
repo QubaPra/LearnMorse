@@ -12,6 +12,24 @@
         android:theme="@style/Theme.LearnMorse"
         tools:targetApi="31">
         <activity
+            android:name=".SendInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpeedInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrainInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LearnInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainSettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SpeedStartActivity"
             android:exported="false" />
         <activity
@@ -37,7 +55,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
