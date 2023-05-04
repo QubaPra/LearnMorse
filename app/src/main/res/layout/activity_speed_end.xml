@@ -98,29 +98,52 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="25dp"
-        android:lineSpacingMultiplier="0.9"
-        android:text="Masz 20 sekund na przetłumaczenie jak największej liczby liter na alfabet morsa"
-        android:textAlignment="center"
-        android:textColor="@color/accent1"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:layout_editor_absoluteX="25dp" />
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="19dp"
+        app:cardBackgroundColor="@color/main1"
+        app:cardCornerRadius="19dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="6dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:text="Twój wynik:"
+                android:textAlignment="center"
+                android:textColor="@color/accent1"
+                android:textSize="45sp" />
+
+            <TextView
+                android:id="@+id/last_score"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="0 pkt"
+                android:textAlignment="center"
+                android:textSize="45sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_above="@+id/button"
-        android:layout_below="@+id/textView"
         android:src="@drawable/ic_stopwatch"
         app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
     <Button
         android:id="@+id/button"
@@ -131,9 +154,9 @@
         android:layout_marginStart="28dp"
         android:layout_marginEnd="28dp"
         android:layout_marginBottom="19dp"
-        android:text="Start!"
+        android:text="Jeszcze raz!"
         android:textColor="@color/white"
-        android:textSize="50sp"
+        android:textSize="38sp"
         app:cornerRadius="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

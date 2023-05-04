@@ -1,5 +1,6 @@
 package com.example.learnmorse
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -10,6 +11,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+var bestScore = "0 pkt"
+var score = "0 pkt"
 class SpeedActivity : AppCompatActivity() {
     private lateinit var buttonDot: Button
     private lateinit var buttonMinus: Button
@@ -45,12 +48,6 @@ class SpeedActivity : AppCompatActivity() {
 
         timer()
 
-        if (countdownTextView.text == "Koniec!") {
-            buttonMinus.isClickable = false
-            buttonDot.isClickable = false
-            layout.isClickable = false
-        }
-
         home.setOnClickListener {
             finish()
         }
@@ -80,32 +77,34 @@ class SpeedActivity : AppCompatActivity() {
     }
 
     private fun checkResult() {
-        val input = textViewResult.text.toString()
+        if (timeLeft>0){
+            val input = textViewResult.text.toString()
 
-        if (input == morseCode) {
-            textViewRandom.setTextColor(getColor(R.color.accent1))
-            addTime()
-            result++
-            textView.text = "$result pkt"
-        } else {
-            textViewRandom.setTextColor(getColor(R.color.accent2))
-            subtractTime()
+            if (input == morseCode) {
+                textViewRandom.setTextColor(getColor(R.color.accent1))
+                addTime()
+                result++
+                textView.text = "$result pkt"
+            } else {
+                textViewRandom.setTextColor(getColor(R.color.accent2))
+                subtractTime()
+            }
+            buttonMinus.isClickable = false
+            buttonDot.isClickable = false
+            layout.isClickable = false
+            Handler(Looper.getMainLooper()).postDelayed({
+                textViewResult.text = ""
+                randomChar = alphabet.random()
+                textViewRandom.text = randomChar.toString()
+
+                textViewRandom.setTextColor(getColor(R.color.white))
+
+                morseCode = getMorseCode(randomChar)
+                buttonMinus.isClickable = true
+                buttonDot.isClickable = true
+                layout.isClickable = true
+            }, 100)
         }
-        buttonMinus.isClickable = false
-        buttonDot.isClickable = false
-        layout.isClickable = false
-        Handler(Looper.getMainLooper()).postDelayed({
-            textViewResult.text = ""
-            randomChar = alphabet.random()
-            textViewRandom.text = randomChar.toString()
-
-            textViewRandom.setTextColor(getColor(R.color.white))
-
-            morseCode = getMorseCode(randomChar)
-            buttonMinus.isClickable = true
-            buttonDot.isClickable = true
-            layout.isClickable = true
-        }, 100)
     }
 
     private fun timer() {
@@ -122,6 +121,12 @@ class SpeedActivity : AppCompatActivity() {
                 buttonMinus.isClickable = false
                 buttonDot.isClickable = false
                 layout.isClickable = false
+                score = textView.text.toString()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(this@SpeedActivity, SpeedEndActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }, 500)
             }
         }.start()
     }
@@ -134,6 +139,15 @@ class SpeedActivity : AppCompatActivity() {
             timer()
         } else {
             countdownTextView.text = "Koniec!"
+            buttonMinus.isClickable = false
+            buttonDot.isClickable = false
+            layout.isClickable = false
+            score = textView.text.toString()
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, SpeedEndActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 500)
 
         }
 
@@ -148,12 +162,28 @@ class SpeedActivity : AppCompatActivity() {
             timer()
         } else {
             countdownTextView.text = "Koniec!"
+            buttonMinus.isClickable = false
+            buttonDot.isClickable = false
+            layout.isClickable = false
+            score = textView.text.toString()
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, SpeedEndActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 500)
         }
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
+        countDownTimer.cancel()
         lastSignal = 0
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, SpeedStartActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
+        finish()
     }
 }
