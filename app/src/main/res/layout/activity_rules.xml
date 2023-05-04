@@ -64,7 +64,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Czym jest afabet morsa?"
+                android:text="Czym jest alfabet morsa?"
                 android:textColor="@color/accent1"
                 android:textSize="24sp" />
 
@@ -108,7 +108,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="W notacji stosuję się także kreskę pionową:"
+                android:text="W notacji stosuje się także kreskę pionową:"
                 android:textSize="18sp" />
 
             <TextView
@@ -175,7 +175,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
                 android:text="Spis liter"
                 android:textColor="@color/accent1"
                 android:textSize="24sp" />

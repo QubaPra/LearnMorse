@@ -6,14 +6,17 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+
+var isTestTutorial = true
 
 class TestActivity : AppCompatActivity() {
-
 
     private lateinit var buttonDot: Button
     private lateinit var buttonMinus: Button
@@ -21,6 +24,8 @@ class TestActivity : AppCompatActivity() {
     private lateinit var textViewRandom: TextView
     private lateinit var layout: RelativeLayout
     private lateinit var home: ImageView
+    private lateinit var textView: TextView
+    private lateinit var info: ImageView
 
     private var mediaPlayer: MediaPlayer? = null
     private val mediaQueue: MutableList<MediaPlayer> = mutableListOf()
@@ -38,6 +43,8 @@ class TestActivity : AppCompatActivity() {
         textViewRandom = findViewById(R.id.textview_random)
         layout = findViewById(R.id.content)
         home = findViewById(R.id.home)
+        textView = findViewById(R.id.textView)
+        info = findViewById(R.id.info)
         val sound = findViewById<ImageView>(R.id.sound)
         if (!isMuted) {
             sound.setImageResource(R.drawable.ic_unmute)
@@ -49,54 +56,66 @@ class TestActivity : AppCompatActivity() {
             finish()
         }
 
-        val info = findViewById<ImageView>(R.id.info)
-        info.setOnClickListener {
-            val intent = Intent(this, TestInfoActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-            finish()
+        if (isTestTutorial) {
+            tutorialAnimation()
         }
-
-        sound.setOnClickListener {
-            if (isMuted) {
-                sound.setImageResource(R.drawable.ic_unmute)
-            } else {
-                sound.setImageResource(R.drawable.ic_mute)
-            }
-            isMuted = !isMuted
-        }
-
-        textViewRandom.text = randomChar.toString()
-
-        buttonDot.setOnClickListener {
-            if (textViewResult.text.length < 4) {
-                textViewResult.append("•")
-                if (!isMuted) {
-                    val media = MediaPlayer.create(this, R.raw.dot)
-                    mediaQueue.add(media)
-                    playMediaQueue()
+            info.setOnClickListener {
+                if (!isTestTutorial) {
+                    isTestTutorial = true
+                    tutorialAnimation()
                 }
-            } else {
-                checkResult()
             }
-        }
-        buttonMinus.setOnClickListener {
-            if (textViewResult.text.length < 4) {
-                textViewResult.append("—")
-                if (!isMuted) {
-                    val media = MediaPlayer.create(this, R.raw.minus)
-                    mediaQueue.add(media)
-                    playMediaQueue()
+
+            sound.setOnClickListener {
+                if (!isTestTutorial) {
+                    if (isMuted) {
+                        sound.setImageResource(R.drawable.ic_unmute)
+                    } else {
+                        sound.setImageResource(R.drawable.ic_mute)
+                    }
+                    isMuted = !isMuted
                 }
-            } else {
-                checkResult()
             }
 
-        }
+            textViewRandom.text = randomChar.toString()
 
-        layout.setOnClickListener {
-            checkResult()
-        }
+            buttonDot.setOnClickListener {
+                if (!isTestTutorial) {
+                    if (textViewResult.text.length < 4) {
+                        textViewResult.append("•")
+                        if (!isMuted) {
+                            val media = MediaPlayer.create(this, R.raw.dot)
+                            mediaQueue.add(media)
+                            playMediaQueue()
+                        }
+                    } else {
+                        checkResult()
+                    }
+                }
+            }
+            buttonMinus.setOnClickListener {
+                if (!isTestTutorial) {
+                    if (textViewResult.text.length < 4) {
+                        textViewResult.append("—")
+                        if (!isMuted) {
+                            val media = MediaPlayer.create(this, R.raw.minus)
+                            mediaQueue.add(media)
+                            playMediaQueue()
+                        }
+                    } else {
+                        checkResult()
+                    }
+                }
+
+            }
+
+            layout.setOnClickListener {
+                if (!isTestTutorial)
+                {
+                    checkResult()
+                }
+            }
+
     }
 
     private fun checkResult() {
@@ -137,6 +156,10 @@ class TestActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (isTestTutorial)
+        {
+            isTestTutorial = false
+        }
         mediaPlayer?.release()
         mediaPlayer = null
         lastSignal = 0
@@ -152,5 +175,43 @@ class TestActivity : AppCompatActivity() {
             }
             mediaPlayer?.start()
         }
+    }
+    private fun tutorialAnimation() {
+        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
+        val testView = findViewById<ConstraintLayout>(R.id.test)
+        val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
+        val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
+        textView.text = "Instrukcja"
+        tutorialView.visibility = View.VISIBLE
+        testView.visibility = View.GONE
+        info.visibility = View.INVISIBLE
+        Handler(Looper.getMainLooper()).postDelayed({
+            blinkAnimation(buttonDot)
+            Handler(Looper.getMainLooper()).postDelayed({
+                blinkAnimation(buttonMinus)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    blinkAnimation(buttonDot)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        blinkAnimation(buttonMinus)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                blinkAnimation(tutorialContent)
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    blinkAnimation(tutorialContent)
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        testView.visibility = View.VISIBLE
+                                        tutorialView.visibility = View.GONE
+                                        info.visibility = View.VISIBLE
+                                        isTestTutorial = false
+                                        textView.text = "Odgadnij literę"
+                                    }, 2000)
+                                }, 500)
+                            }, 500)
+                        }, 2000)
+                    }, 500)
+                }, 500)
+            }, 500)
+        }, 1000)
     }
 }
