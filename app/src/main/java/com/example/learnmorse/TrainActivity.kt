@@ -84,10 +84,7 @@ class TrainActivity : AppCompatActivity() {
 
         val info = findViewById<ImageView>(R.id.info)
         info.setOnClickListener {
-            val intent = Intent(this, TrainInfoActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-            finish()
+            //uzupełnić
         }
 
         buttonDot.setOnClickListener {

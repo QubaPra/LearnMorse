@@ -18,21 +18,6 @@
             android:name=".SpeedEndActivity"
             android:exported="false" />
         <activity
-            android:name=".SendInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SpeedInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TrainInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LearnInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TestInfoActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainSettingsActivity"
             android:exported="false" />
         <activity
