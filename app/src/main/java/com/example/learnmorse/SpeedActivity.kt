@@ -1,6 +1,5 @@
 package com.example.learnmorse
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -9,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class SpeedActivity : AppCompatActivity() {
     private lateinit var buttonDot: Button
@@ -29,7 +29,6 @@ class SpeedActivity : AppCompatActivity() {
     private var subtractTimeAmount: Long = 500
 
     private var result = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speed)
@@ -62,16 +61,14 @@ class SpeedActivity : AppCompatActivity() {
             if (textViewResult.text.length < 4) {
                 textViewResult.append("•")
 
-            }
-            else {
+            } else {
                 checkResult()
             }
         }
         buttonMinus.setOnClickListener {
-            if (textViewResult.text.length < 4){
+            if (textViewResult.text.length < 4) {
                 textViewResult.append("—")
-            }
-            else {
+            } else {
                 checkResult()
             }
 
@@ -81,6 +78,7 @@ class SpeedActivity : AppCompatActivity() {
             checkResult()
         }
     }
+
     private fun checkResult() {
         val input = textViewResult.text.toString()
 
@@ -127,28 +125,28 @@ class SpeedActivity : AppCompatActivity() {
             }
         }.start()
     }
+
     private fun addTime() {
-        timeLeft=(countdownTextView.text.toString().toDouble()*1000).toLong()
-        timeLeft+= addTimeAmount
+        timeLeft = (countdownTextView.text.toString().toDouble() * 1000).toLong()
+        timeLeft += addTimeAmount
         countDownTimer.cancel()
         if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
             timer()
-        }
-        else {
+        } else {
             countdownTextView.text = "Koniec!"
 
         }
 
 
     }
+
     private fun subtractTime() {
-        timeLeft=(countdownTextView.text.toString().toDouble()*1000).toLong()
-        timeLeft-= subtractTimeAmount
+        timeLeft = (countdownTextView.text.toString().toDouble() * 1000).toLong()
+        timeLeft -= subtractTimeAmount
         countDownTimer.cancel()
         if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
             timer()
-        }
-        else {
+        } else {
             countdownTextView.text = "Koniec!"
         }
     }

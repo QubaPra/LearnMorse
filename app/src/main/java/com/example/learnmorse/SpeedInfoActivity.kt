@@ -1,10 +1,9 @@
 package com.example.learnmorse
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-
+import androidx.appcompat.app.AppCompatActivity
 class SpeedInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -12,7 +11,6 @@ class SpeedInfoActivity : AppCompatActivity() {
 
         val imageView: ImageView = findViewById(R.id.imageView)
         imageView.setImageResource(R.drawable.ic_stopwatch)
-
 
         val closeButton: ImageView = findViewById(R.id.close)
         closeButton.setOnClickListener {

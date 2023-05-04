@@ -53,11 +53,11 @@
             android:layout_marginTop="17dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView2"
             app:layout_constraintEnd_toStartOf="@+id/home"
             app:layout_constraintTop_toTopOf="@+id/textView2"
-            app:srcCompat="@drawable/ic_rules"
-            android:padding="2dp"/>
+            app:srcCompat="@drawable/ic_rules" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -99,7 +99,6 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/imageView5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardBackgroundColor="@color/background"

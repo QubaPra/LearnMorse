@@ -72,9 +72,9 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="Jest to system telegraficzny, który wykorzystuje kombinacje krótkich i długich sygnałów dźwiękowych lub świetlnych w celu przekazywania informacji. Został wynaleziony przez Samuela Morse'a w 1837 roku i był powszechnie stosowany przez radioamatorów, statki i wojsko do komunikacji na dużych odległościach przed wynalezieniem telefonu."
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp"/>
+                android:textSize="18sp" />
 
             <TextView
 
@@ -104,11 +104,13 @@
                 android:layout_height="wrap_content"
                 android:text="Kropki reprezentowane są przez krótkie sygnały, a kreski przez długie sygnały. Każda litera alfabetu ma swoją unikalną kombinację kropek i kresek w alfabecie morsa."
                 android:textSize="18sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="W notacji stosuję się także kreskę pionową:"
                 android:textSize="18sp" />
+
             <TextView
 
                 android:layout_width="wrap_content"
@@ -117,22 +119,26 @@
                 android:text="|     ||      |||"
                 android:textColor="@color/accent1"
                 android:textSize="50sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pojedyncza kreska pionowa oznacza przerwę między literami."
                 android:textSize="18sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Podwójna kreska pionowa oznacza przerwę między wyrazami."
                 android:textSize="18sp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="Potrójna kreska pionowa oznacza przerwę między zdaniami."
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp"/>
+                android:textSize="18sp" />
+
             <TextView
 
                 android:layout_width="wrap_content"
@@ -146,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:text="SOS w alfabecie morsa wygląda następująco:"
                 android:textSize="18sp" />
+
             <TextView
 
                 android:layout_width="wrap_content"
@@ -154,6 +161,7 @@
                 android:text="S             O            S"
                 android:textColor="@color/accent1"
                 android:textSize="35sp" />
+
             <TextView
 
                 android:layout_width="wrap_content"
@@ -162,14 +170,15 @@
                 android:text="• • • | — — — | • • •"
 
                 android:textSize="35sp" />
+
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="Spis liter"
                 android:textColor="@color/accent1"
-                android:textSize="24sp"
-                android:layout_marginBottom="12dp"/>
+                android:textSize="24sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

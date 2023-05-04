@@ -12,10 +12,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-
-
 class TestActivity : AppCompatActivity() {
-
 
 
     private lateinit var buttonDot: Button
@@ -79,21 +76,19 @@ class TestActivity : AppCompatActivity() {
                     mediaQueue.add(media)
                     playMediaQueue()
                 }
-            }
-            else {
+            } else {
                 checkResult()
             }
         }
         buttonMinus.setOnClickListener {
-            if (textViewResult.text.length < 4){
+            if (textViewResult.text.length < 4) {
                 textViewResult.append("—")
                 if (!isMuted) {
                     val media = MediaPlayer.create(this, R.raw.minus)
                     mediaQueue.add(media)
                     playMediaQueue()
                 }
-            }
-            else {
+            } else {
                 checkResult()
             }
 
@@ -103,6 +98,7 @@ class TestActivity : AppCompatActivity() {
             checkResult()
         }
     }
+
     private fun checkResult() {
         val input = textViewResult.text.toString()
         if (input == morseCode) {
@@ -118,7 +114,8 @@ class TestActivity : AppCompatActivity() {
             randomChar = alphabet.random()
             textViewRandom.text = randomChar.toString()
             val configuration = resources.configuration
-            val isDarkMode = configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+            val isDarkMode =
+                configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
             if (isDarkMode) {
                 textViewRandom.setTextColor(getColor(R.color.white))
             } else {
@@ -144,6 +141,7 @@ class TestActivity : AppCompatActivity() {
         mediaPlayer = null
         lastSignal = 0
     }
+
     private fun playMediaQueue() {
         if (mediaQueue.isNotEmpty() && mediaPlayer == null) {
             mediaPlayer = mediaQueue.removeAt(0)

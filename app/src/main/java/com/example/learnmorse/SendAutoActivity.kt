@@ -13,11 +13,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-
 class SendAutoActivity : AppCompatActivity() {
 
     private lateinit var countDownTimer: CountDownTimer
-    var wiad:String = ""
+    var wiad: String = ""
     var isSignal = false
 
     private lateinit var cameraManager: CameraManager
@@ -59,60 +58,62 @@ class SendAutoActivity : AppCompatActivity() {
         buttonStart = findViewById(R.id.button_start)
 
         buttonMinus.setOnClickListener {
-            if (textView.text.toString().substringAfterLast(" ").length<4) {
+            if (textView.text.toString().substringAfterLast(" ").length < 4) {
                 textView.append("—")
             }
         }
         buttonDot.setOnClickListener {
-            if (textView.text.toString().substringAfterLast(" ").length<4) {
+            if (textView.text.toString().substringAfterLast(" ").length < 4) {
                 textView.append("•")
             }
         }
         buttonSpace.setOnClickListener {
             var text = textView.text.toString()
             if (text.isNotEmpty()) {
-                if (!(text.length>3 && text.substring(text.length-3, text.length-1)==". ")) {
+                if (!(text.length > 3 && text.substring(
+                        text.length - 3,
+                        text.length - 1
+                    ) == ". ")
+                ) {
                     textView.append(" ")
                     text = textView.text.toString()
 
-                    if (text.length>3 && text.substring(text.length-3, text.length-1)=="  " ) {
+                    if (text.length > 3 && text.substring(
+                            text.length - 3,
+                            text.length - 1
+                        ) == "  "
+                    ) {
 
-                        textView.text = text.substring(0, text.length-3)+".  "
-                    }
-                    else {
+                        textView.text = text.substring(0, text.length - 3) + ".  "
+                    } else {
                         var letter = getNormalLetter(lastLetter(text)) + " "
                         if (letter == "  " && lastLetter(text) != "") {
                             letter = " "
                         }
-                        if (letter != null) {
-                            if (text.substringBeforeLast(" ")
-                                    .substringBeforeLast(" ") == lastLetter(text)
-                            ) {
-                                textView.text = letter
-                            } else
-                                textView.text =
-                                    text.substringBeforeLast(" ").substringBeforeLast(" ") + letter
-                        }
+                        if (text.substringBeforeLast(" ")
+                                .substringBeforeLast(" ") == lastLetter(text)
+                        ) {
+                            textView.text = letter
+                        } else
+                            textView.text =
+                                text.substringBeforeLast(" ").substringBeforeLast(" ") + letter
                     }
                 }
             }
         }
 
         buttonBack.setOnClickListener {
-            var text = textView.text.toString()
+            val text = textView.text.toString()
             if (text.isNotEmpty()) {
-                if (text[text.length-1]==' '&&text.length>1) {
-                    textView.text = text.substring(0, text.length - 2)+" "
-                }
-
-                else if (text.isNotEmpty()) {
+                if (text[text.length - 1] == ' ' && text.length > 1) {
+                    textView.text = text.substring(0, text.length - 2) + " "
+                } else if (text.isNotEmpty()) {
                     textView.text = text.substring(0, text.length - 1)
                 }
             }
-            if (text.length>3 && text.substring(text.length-3, text.length-1)==". ") {
-                textView.text = text.substring(0, text.length - 3)+"  "
+            if (text.length > 3 && text.substring(text.length - 3, text.length - 1) == ". ") {
+                textView.text = text.substring(0, text.length - 3) + "  "
             }
-
 
 
         }
@@ -129,24 +130,21 @@ class SendAutoActivity : AppCompatActivity() {
                     isSignal = true
                     lightTimer()
 
-                }
-                else {
+                } else {
                     buttonStart.text = "Start!"
                     countDownTimer.cancel()
                 }
             }
         }
-
     }
-
 
     private fun lastLetter(str: String): String {
         var letter = ""
         var i = str.length - 2
-        while (i>=0 && str[i] != ' ') {
+        while (i >= 0 && str[i] != ' ') {
             i--
         }
-        letter = str.substring(i+1, str.length-1)
+        letter = str.substring(i + 1, str.length - 1)
         return letter
     }
 
@@ -157,11 +155,9 @@ class SendAutoActivity : AppCompatActivity() {
 
         if (wiad[0] == '•') {
             signalTime = 100
-        }
-        else if (wiad[0] == '—') {
+        } else if (wiad[0] == '—') {
             signalTime = 500
-        }
-        else if (wiad[0] == '|' || wiad[0] == ' ') {
+        } else if (wiad[0] == '|' || wiad[0] == ' ') {
             signalTime = 500
             wait = true
         }
@@ -184,9 +180,7 @@ class SendAutoActivity : AppCompatActivity() {
                     wait = false
                     if (wiad.isNotEmpty()) {
                         lightTimer()
-                    }
-                    else
-                    {
+                    } else {
                         isSignal = false
                         buttonStart.text = "Start!"
                         countDownTimer.cancel()
@@ -199,13 +193,10 @@ class SendAutoActivity : AppCompatActivity() {
     private fun translate() {
         wiad = ""
         val text = textView.text.toString()
-        for (i in 0..text.length-1) {
-            if (text[i] == ' ' || text[i] == '.')
-            {
+        for (i in text.indices) {
+            if (text[i] == ' ' || text[i] == '.') {
                 wiad += " "
-            }
-            else
-            {
+            } else {
                 wiad += getMorseCode(text[i]) + "|"
             }
         }
@@ -218,6 +209,7 @@ class SendAutoActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
     private fun lightOff() {
         try {
             cameraManager.setTorchMode(cameraId!!, false)

@@ -104,21 +104,21 @@ class LearnActivity : AppCompatActivity() {
                         mediaQueue.add(media)
                         playMediaQueue()
                     }
-                }
-                if (lastSignal == text.length) {
-                    buttonMinus.isClickable = false
-                    buttonDot.isClickable = false
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        lastLetter++
-                        if (alphabet[lastLetter] > 'Z') {
-                            lastLetter = 0
-                        }
-                        textViewRandom.text = alphabet[lastLetter].toString()
-                        textViewResult.text = getMorseCode(alphabet[lastLetter])
-                        lastSignal = 0
-                        buttonMinus.isClickable = true
-                        buttonDot.isClickable = true
-                    }, 1000)
+                    if (lastSignal == text.length) {
+                        buttonMinus.isClickable = false
+                        buttonDot.isClickable = false
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            lastLetter++
+                            if (lastLetter> alphabet.length - 1) {
+                                lastLetter = 0
+                            }
+                            textViewRandom.text = alphabet[lastLetter].toString()
+                            textViewResult.text = getMorseCode(alphabet[lastLetter])
+                            lastSignal = 0
+                            buttonMinus.isClickable = true
+                            buttonDot.isClickable = true
+                        }, 1000)
+                    }
 
                 }
 
@@ -167,7 +167,7 @@ class LearnActivity : AppCompatActivity() {
                         buttonDot.isClickable = false
                         Handler(Looper.getMainLooper()).postDelayed({
                             lastLetter++
-                            if (alphabet[lastLetter] > 'Z') {
+                            if (lastLetter> alphabet.length - 1) {
                                 lastLetter = 0
                             }
                             textViewRandom.text = alphabet[lastLetter].toString()
@@ -176,14 +176,9 @@ class LearnActivity : AppCompatActivity() {
                             buttonMinus.isClickable = true
                             buttonDot.isClickable = true
                         }, 1000)
-
                     }
                 }
-
-
             }
-
-
         }
     }
 

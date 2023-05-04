@@ -73,7 +73,6 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/imageView8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardBackgroundColor="@color/main1"
@@ -137,7 +136,6 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/imageView5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardBackgroundColor="@color/background"

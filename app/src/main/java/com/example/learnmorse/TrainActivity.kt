@@ -2,7 +2,6 @@ package com.example.learnmorse
 
 import android.content.Intent
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,6 +13,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 const val alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
@@ -92,21 +92,31 @@ class TrainActivity : AppCompatActivity() {
 
         buttonDot.setOnClickListener {
 
-            if (learnMode){
+            if (learnMode) {
                 val text = textViewResult.text
-                if (lastTrainSignal < text.length){
+                if (lastTrainSignal < text.length) {
                     var color = 0
                     if (textViewResult.text[lastTrainSignal].toString() == "•") {
                         color = green
-                    }
-                    else {
+                    } else {
                         color = red
                     }
 
                     val coloredText = SpannableString(text.substring(0, lastTrainSignal + 1))
-                    coloredText.setSpan(ForegroundColorSpan(green),0,lastTrainSignal,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    coloredText.setSpan(ForegroundColorSpan(color),lastTrainSignal,lastTrainSignal + 1,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    textViewResult.text = TextUtils.concat(coloredText, text.substring(lastTrainSignal + 1))
+                    coloredText.setSpan(
+                        ForegroundColorSpan(green),
+                        0,
+                        lastTrainSignal,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    coloredText.setSpan(
+                        ForegroundColorSpan(color),
+                        lastTrainSignal,
+                        lastTrainSignal + 1,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    textViewResult.text =
+                        TextUtils.concat(coloredText, text.substring(lastTrainSignal + 1))
 
                     lastTrainSignal++
 
@@ -116,54 +126,54 @@ class TrainActivity : AppCompatActivity() {
                         Handler(Looper.getMainLooper()).postDelayed({
                             lastTrainSignal = 0
                             val coloredText = SpannableString(text)
-                            coloredText.setSpan(ForegroundColorSpan(white),0,text.length,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                            coloredText.setSpan(
+                                ForegroundColorSpan(white),
+                                0,
+                                text.length,
+                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                            )
                             textViewResult.text = coloredText
                             buttonMinus.isClickable = true
                             buttonDot.isClickable = true
                         }, 1000)
-                    }
-                    else {
+                    } else {
                         if (!isMuted) {
                             val media = MediaPlayer.create(this, R.raw.dot)
                             mediaQueue.add(media)
                             playMediaQueue()
                         }
+                        if (lastTrainSignal == text.length) {
+                            buttonMinus.isClickable = false
+                            buttonDot.isClickable = false
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                reps++
+                                if (last>= alphabet.length - 1) {
+                                    last += 1
+                                    reps = 4
+                                }
+                                if (reps > 3) {
+                                    learnMode = false
+                                    textView.text = "Odgadnij literę"
+                                    reps = 0
+                                    last -= 3
+                                    textViewRandom.text = alphabet[last].toString()
+                                    textViewResult.text = ""
+                                    lastTrainSignal = 0
+                                    buttonMinus.isClickable = true
+                                    buttonDot.isClickable = true
+                                } else {
+                                    last++
+                                    textViewRandom.text = alphabet[last].toString()
+                                    textViewResult.text = getMorseCode(alphabet[last])
+                                    lastTrainSignal = 0
+                                    buttonMinus.isClickable = true
+                                    buttonDot.isClickable = true
+                                }
+                            }, 1000)
+                        }
                     }
-                    if (lastTrainSignal == text.length) {
-                        buttonMinus.isClickable = false
-                        buttonDot.isClickable = false
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            reps++
-                            if (alphabet[last] >= 'Z') {
-                                last+=2
-                                reps = 4
-                            }
-                            if (reps > 3) {
-                                learnMode = false
-                                textView.text = "Odgadnij literę"
-                                reps = 0
-                                last-=3
-                                textViewRandom.text = alphabet[last].toString()
-                                textViewResult.text = ""
-                                lastTrainSignal = 0
-                                buttonMinus.isClickable = true
-                                buttonDot.isClickable = true
-                            }
-                            else {
-                                last++
-                                textViewRandom.text = alphabet[last].toString()
-                                textViewResult.text = getMorseCode(alphabet[last])
-                                lastTrainSignal = 0
-                                buttonMinus.isClickable = true
-                                buttonDot.isClickable = true
-                            }
-                        }, 1000)
-
-                    }
-
                 }
-            }
-            else {
+            } else {
                 if (textViewResult.text.length < 4) {
                     textViewResult.append("•")
                     if (!isMuted) {
@@ -171,8 +181,7 @@ class TrainActivity : AppCompatActivity() {
                         mediaQueue.add(media)
                         playMediaQueue()
                     }
-                }
-                else {
+                } else {
                     checkResult()
                 }
             }
@@ -189,23 +198,33 @@ class TrainActivity : AppCompatActivity() {
 
         buttonMinus.setOnClickListener {
 
-            if (learnMode){
+            if (learnMode) {
                 val text = textViewResult.text
-                if (lastTrainSignal < text.length){
+                if (lastTrainSignal < text.length) {
                     var color = 0
                     if (textViewResult.text[lastTrainSignal].toString() == "—") {
                         color = green
 
-                    }
-                    else {
+                    } else {
                         color = red
 
                     }
 
                     val coloredText = SpannableString(text.substring(0, lastTrainSignal + 1))
-                    coloredText.setSpan(ForegroundColorSpan(green),0,lastTrainSignal,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    coloredText.setSpan(ForegroundColorSpan(color),lastTrainSignal,lastTrainSignal + 1,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    textViewResult.text = TextUtils.concat(coloredText, text.substring(lastTrainSignal + 1))
+                    coloredText.setSpan(
+                        ForegroundColorSpan(green),
+                        0,
+                        lastTrainSignal,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    coloredText.setSpan(
+                        ForegroundColorSpan(color),
+                        lastTrainSignal,
+                        lastTrainSignal + 1,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    textViewResult.text =
+                        TextUtils.concat(coloredText, text.substring(lastTrainSignal + 1))
 
                     lastTrainSignal++
 
@@ -215,13 +234,17 @@ class TrainActivity : AppCompatActivity() {
                         Handler(Looper.getMainLooper()).postDelayed({
                             lastTrainSignal = 0
                             val coloredText = SpannableString(text)
-                            coloredText.setSpan(ForegroundColorSpan(white),0,text.length,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                            coloredText.setSpan(
+                                ForegroundColorSpan(white),
+                                0,
+                                text.length,
+                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                            )
                             textViewResult.text = coloredText
                             buttonMinus.isClickable = true
                             buttonDot.isClickable = true
                         }, 1000)
-                    }
-                    else {
+                    } else {
                         if (!isMuted) {
                             val media = MediaPlayer.create(this, R.raw.minus)
                             mediaQueue.add(media)
@@ -232,22 +255,20 @@ class TrainActivity : AppCompatActivity() {
                             buttonDot.isClickable = false
                             Handler(Looper.getMainLooper()).postDelayed({
                                 reps++
-                                if (alphabet[last] > 'Z') {
-                                    last+=2
+                                if (last>= alphabet.length - 1) {
+                                    last += 1
                                     reps = 4
-                                }
-                                else if (reps > 3) {
+                                } else if (reps > 3) {
                                     learnMode = false
                                     textView.text = "Odgadnij literę"
                                     reps = 0
-                                    last-=3
+                                    last -= 3
                                     textViewRandom.text = alphabet[last].toString()
                                     textViewResult.text = ""
                                     lastTrainSignal = 0
                                     buttonMinus.isClickable = true
                                     buttonDot.isClickable = true
-                                }
-                                else {
+                                } else {
                                     last++
 
                                     textViewRandom.text = alphabet[last].toString()
@@ -264,8 +285,7 @@ class TrainActivity : AppCompatActivity() {
                     }
 
                 }
-            }
-            else {
+            } else {
                 if (textViewResult.text.length < 4) {
                     textViewResult.append("—")
                     if (!isMuted) {
@@ -273,8 +293,7 @@ class TrainActivity : AppCompatActivity() {
                         mediaQueue.add(media)
                         playMediaQueue()
                     }
-                }
-                else {
+                } else {
                     checkResult()
                 }
             }
@@ -294,10 +313,9 @@ class TrainActivity : AppCompatActivity() {
         if (input == getMorseCode(alphabet[last])) {
             textViewRandom.setTextColor(getColor(R.color.accent1))
             tries = 0
-            if (alphabet[last] >= 'Z') {
+            if (last>= alphabet.length - 1) {
                 reps = 4
-            }
-            else {
+            } else {
                 last++
                 reps++
             }
@@ -313,19 +331,20 @@ class TrainActivity : AppCompatActivity() {
         buttonMinus.isClickable = false
         buttonDot.isClickable = false
         layout.isClickable = false
+        if (last> alphabet.length - 1) {
+            last = 0
+            reps = 4
+        }
         Handler(Looper.getMainLooper()).postDelayed({
 
             if (reps > 3) {
                 learnMode = true
                 textView.text = "Przepisz literę"
                 reps = 0
-                if (alphabet[last] >= 'Z') {
-                    last=0
-                }
+
                 textViewResult.text = getMorseCode(alphabet[last])
                 lastTrainSignal = 0
-            }
-            else {
+            } else {
                 textViewResult.text = ""
             }
             textViewRandom.text = alphabet[last].toString()
@@ -343,6 +362,7 @@ class TrainActivity : AppCompatActivity() {
         mediaPlayer = null
         lastTrainSignal = 0
     }
+
     private fun playMediaQueue() {
         if (mediaQueue.isNotEmpty() && mediaPlayer == null) {
             mediaPlayer = mediaQueue.removeAt(0)

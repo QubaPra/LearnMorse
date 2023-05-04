@@ -65,8 +65,7 @@
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_marginRight="10dp"
-            >
+            android:layout_marginRight="10dp">
 
             <Button
                 android:id="@+id/nauka"
@@ -118,19 +117,19 @@
             android:layout_marginRight="10dp">
 
 
-                <Button
-                    android:id="@+id/test"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableBottom="@drawable/ic_test"
-                    android:gravity="center|top"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="19dp"
-                    android:text="Test"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="19dp" />
+            <Button
+                android:id="@+id/test"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableBottom="@drawable/ic_test"
+                android:gravity="center|top"
+                android:paddingTop="15dp"
+                android:paddingBottom="19dp"
+                android:text="Test"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:cornerRadius="19dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -141,19 +140,19 @@
             android:layout_columnWeight="1"
             android:layout_marginLeft="10dp">
 
-                <Button
-                    android:id="@+id/speed"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableBottom="@drawable/ic_stopwatch"
-                    android:gravity="center|top"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="19dp"
-                    android:text="Speed"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="19dp" />
+            <Button
+                android:id="@+id/speed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableBottom="@drawable/ic_stopwatch"
+                android:gravity="center|top"
+                android:paddingTop="15dp"
+                android:paddingBottom="19dp"
+                android:text="Speed"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:cornerRadius="19dp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -164,19 +163,19 @@
             android:layout_columnWeight="1"
             android:layout_marginRight="10dp">
 
-                <Button
-                    android:id="@+id/nadaj"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableBottom="@drawable/ic_send"
-                    android:gravity="center|top"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="19dp"
-                    android:text="Nadaj"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:textStyle="bold"
-                    app:cornerRadius="19dp" />
+            <Button
+                android:id="@+id/nadaj"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableBottom="@drawable/ic_send"
+                android:gravity="center|top"
+                android:paddingTop="15dp"
+                android:paddingBottom="19dp"
+                android:text="Nadaj"
+                android:textColor="@color/white"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:cornerRadius="19dp" />
         </RelativeLayout>
 
         <RelativeLayout

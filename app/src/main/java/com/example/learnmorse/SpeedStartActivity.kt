@@ -1,10 +1,10 @@
 package com.example.learnmorse
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 
 class SpeedStartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +29,5 @@ class SpeedStartActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 }
