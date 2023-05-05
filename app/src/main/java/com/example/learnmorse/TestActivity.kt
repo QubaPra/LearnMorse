@@ -1,11 +1,8 @@
 package com.example.learnmorse
 
-import android.content.Intent
-import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -32,6 +29,8 @@ class TestActivity : AppCompatActivity() {
 
     private var randomChar = alphabet.random()
     private var morseCode = getMorseCode(randomChar)
+
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -128,23 +127,22 @@ class TestActivity : AppCompatActivity() {
         buttonMinus.isClickable = false
         buttonDot.isClickable = false
         layout.isClickable = false
-        Handler(Looper.getMainLooper()).postDelayed({
-            textViewResult.text = ""
-            randomChar = alphabet.random()
-            textViewRandom.text = randomChar.toString()
-            val configuration = resources.configuration
-            val isDarkMode =
-                configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
-            if (isDarkMode) {
-                textViewRandom.setTextColor(getColor(R.color.white))
-            } else {
-                textViewRandom.setTextColor(getColor(R.color.white))
+
+        countDownTimer = object : CountDownTimer(1000,1000) {
+            override fun onTick(millisUntilFinished: Long) {
             }
-            morseCode = getMorseCode(randomChar)
-            buttonMinus.isClickable = true
-            buttonDot.isClickable = true
-            layout.isClickable = true
-        }, 1000)
+
+            override fun onFinish() {
+                textViewResult.text = ""
+                randomChar = alphabet.random()
+                textViewRandom.text = randomChar.toString()
+                textViewRandom.setTextColor(getColor(R.color.white))
+                morseCode = getMorseCode(randomChar)
+                buttonMinus.isClickable = true
+                buttonDot.isClickable = true
+                layout.isClickable = true
+            }
+        }.start()
     }
 
     override fun onStop() {
@@ -159,6 +157,9 @@ class TestActivity : AppCompatActivity() {
         if (isTestTutorial)
         {
             isTestTutorial = false
+        }
+        if (::countDownTimer.isInitialized) {
+            countDownTimer.cancel()
         }
         mediaPlayer?.release()
         mediaPlayer = null
@@ -185,33 +186,28 @@ class TestActivity : AppCompatActivity() {
         tutorialView.visibility = View.VISIBLE
         testView.visibility = View.GONE
         info.visibility = View.INVISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            blinkAnimation(buttonDot)
-            Handler(Looper.getMainLooper()).postDelayed({
-                blinkAnimation(buttonMinus)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    blinkAnimation(buttonDot)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        blinkAnimation(buttonMinus)
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                blinkAnimation(tutorialContent)
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    blinkAnimation(tutorialContent)
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        testView.visibility = View.VISIBLE
-                                        tutorialView.visibility = View.GONE
-                                        info.visibility = View.VISIBLE
-                                        isTestTutorial = false
-                                        textView.text = "Odgadnij literę"
-                                    }, 2000)
-                                }, 500)
-                            }, 500)
-                        }, 2000)
-                    }, 500)
-                }, 500)
-            }, 500)
-        }, 1000)
+
+        countDownTimer = object : CountDownTimer(8000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (((8000 - millisUntilFinished)*2)/1000/2.0) {
+                    2.0 -> blinkAnimation(buttonDot)
+                    2.5 -> blinkAnimation(buttonMinus)
+                    3.0 -> blinkAnimation(buttonDot)
+                    3.5 -> blinkAnimation(buttonMinus)
+                    4.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    6.0 -> blinkAnimation(tutorialContent)
+                    6.5 -> blinkAnimation(tutorialContent)
+                }
+            }
+
+            override fun onFinish() {
+                testView.visibility = View.VISIBLE
+                tutorialView.visibility = View.GONE
+                info.visibility = View.VISIBLE
+                isTestTutorial = false
+                textView.text = "Odgadnij literę"
+            }
+        }.start()
+
     }
 }

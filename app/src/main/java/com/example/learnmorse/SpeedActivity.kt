@@ -213,7 +213,7 @@ class SpeedActivity : AppCompatActivity() {
 
         animationTimer = object : CountDownTimer(14500, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                when (((15000 - millisUntilFinished)*2)/1000/2.0) {
+                when (((14500 - millisUntilFinished)*2)/1000/2.0) {
                     2.0 -> blinkAnimation(buttonDot)
                     2.5 -> blinkAnimation(buttonMinus)
                     3.0 -> blinkAnimation(buttonDot)

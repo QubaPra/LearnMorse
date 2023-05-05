@@ -1,13 +1,10 @@
 package com.example.learnmorse
 
 import android.content.Context
-import android.content.Intent
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -129,6 +126,7 @@ class SendAutoActivity : AppCompatActivity() {
 
                 } else {
                     buttonStart.text = "Start!"
+                    lightOff()
                     countDownTimer.cancel()
                 }
             }
@@ -160,31 +158,38 @@ class SendAutoActivity : AppCompatActivity() {
         }
         wiad = wiad.substring(1, wiad.length)
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (!wait) {
-                lightOn()
+
+        countDownTimer = object : CountDownTimer(500, 100) {
+
+            override fun onTick(millisUntilFinished: Long) {
             }
 
-            countDownTimer = object : CountDownTimer(signalTime, 100) {
-
-                override fun onTick(millisUntilFinished: Long) {
+            override fun onFinish() {
+                if (!wait) {
+                    lightOn()
                 }
+                countDownTimer = object : CountDownTimer(signalTime, 100) {
 
-                override fun onFinish() {
-                    if (!wait) {
-                        lightOff()
+                    override fun onTick(millisUntilFinished: Long) {
                     }
-                    wait = false
-                    if (wiad.isNotEmpty()) {
-                        lightTimer()
-                    } else {
-                        isSignal = false
-                        buttonStart.text = "Start!"
-                        countDownTimer.cancel()
+
+                    override fun onFinish() {
+                        if (!wait) {
+                            lightOff()
+                        }
+                        wait = false
+                        if (wiad.isNotEmpty()) {
+                            lightTimer()
+                        } else {
+                            isSignal = false
+                            buttonStart.text = "Start!"
+                            countDownTimer.cancel()
+                        }
                     }
-                }
-            }.start()
-        }, 500)
+                }.start()
+            }
+        }.start()
+
     }
 
     private fun translate() {
@@ -212,6 +217,14 @@ class SendAutoActivity : AppCompatActivity() {
             cameraManager.setTorchMode(cameraId!!, false)
         } catch (e: CameraAccessException) {
             e.printStackTrace()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (isSignal) {
+            lightOff()
+            countDownTimer.cancel()
         }
     }
 }

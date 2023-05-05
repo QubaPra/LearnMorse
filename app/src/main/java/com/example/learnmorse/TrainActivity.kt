@@ -1,10 +1,8 @@
 package com.example.learnmorse
 
-import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
@@ -35,6 +33,8 @@ class TrainActivity : AppCompatActivity() {
 
     private var mediaPlayer: MediaPlayer? = null
     private val mediaQueue: MutableList<MediaPlayer> = mutableListOf()
+
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,19 +120,26 @@ class TrainActivity : AppCompatActivity() {
                     if (color == red) {
                         buttonMinus.isClickable = false
                         buttonDot.isClickable = false
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            lastTrainSignal = 0
-                            val coloredText = SpannableString(text)
-                            coloredText.setSpan(
-                                ForegroundColorSpan(white),
-                                0,
-                                text.length,
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                            )
-                            textViewResult.text = coloredText
-                            buttonMinus.isClickable = true
-                            buttonDot.isClickable = true
-                        }, 1000)
+
+                        countDownTimer = object : CountDownTimer(1000,1000) {
+                            override fun onTick(millisUntilFinished: Long) {
+                            }
+
+                            override fun onFinish() {
+                                lastTrainSignal = 0
+                                val coloredText = SpannableString(text)
+                                coloredText.setSpan(
+                                    ForegroundColorSpan(white),
+                                    0,
+                                    text.length,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                textViewResult.text = coloredText
+                                buttonMinus.isClickable = true
+                                buttonDot.isClickable = true
+                            }
+                        }.start()
+
                     } else {
                         if (!isMuted) {
                             val media = MediaPlayer.create(this, R.raw.dot)
@@ -142,31 +149,37 @@ class TrainActivity : AppCompatActivity() {
                         if (lastTrainSignal == text.length) {
                             buttonMinus.isClickable = false
                             buttonDot.isClickable = false
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                reps++
-                                if (last>= alphabet.length - 1) {
-                                    last += 1
-                                    reps = 4
+
+                            countDownTimer = object : CountDownTimer(1000,1000) {
+                                override fun onTick(millisUntilFinished: Long) {
                                 }
-                                if (reps > 3) {
-                                    learnMode = false
-                                    textView.text = "Odgadnij literę"
-                                    reps = 0
-                                    last -= 3
-                                    textViewRandom.text = alphabet[last].toString()
-                                    textViewResult.text = ""
-                                    lastTrainSignal = 0
-                                    buttonMinus.isClickable = true
-                                    buttonDot.isClickable = true
-                                } else {
-                                    last++
-                                    textViewRandom.text = alphabet[last].toString()
-                                    textViewResult.text = getMorseCode(alphabet[last])
-                                    lastTrainSignal = 0
-                                    buttonMinus.isClickable = true
-                                    buttonDot.isClickable = true
+
+                                override fun onFinish() {
+                                    reps++
+                                    if (last>= alphabet.length - 1) {
+                                        last += 1
+                                        reps = 4
+                                    }
+                                    if (reps > 3) {
+                                        learnMode = false
+                                        textView.text = "Odgadnij literę"
+                                        reps = 0
+                                        last -= 3
+                                        textViewRandom.text = alphabet[last].toString()
+                                        textViewResult.text = ""
+                                        lastTrainSignal = 0
+                                        buttonMinus.isClickable = true
+                                        buttonDot.isClickable = true
+                                    } else {
+                                        last++
+                                        textViewRandom.text = alphabet[last].toString()
+                                        textViewResult.text = getMorseCode(alphabet[last])
+                                        lastTrainSignal = 0
+                                        buttonMinus.isClickable = true
+                                        buttonDot.isClickable = true
+                                    }
                                 }
-                            }, 1000)
+                            }.start()
                         }
                     }
                 }
@@ -228,19 +241,25 @@ class TrainActivity : AppCompatActivity() {
                     if (color == red) {
                         buttonMinus.isClickable = false
                         buttonDot.isClickable = false
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            lastTrainSignal = 0
-                            val coloredText = SpannableString(text)
-                            coloredText.setSpan(
-                                ForegroundColorSpan(white),
-                                0,
-                                text.length,
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                            )
-                            textViewResult.text = coloredText
-                            buttonMinus.isClickable = true
-                            buttonDot.isClickable = true
-                        }, 1000)
+
+                        countDownTimer = object : CountDownTimer(1000,1000) {
+                            override fun onTick(millisUntilFinished: Long) {
+                            }
+
+                            override fun onFinish() {
+                                lastTrainSignal = 0
+                                val coloredText = SpannableString(text)
+                                coloredText.setSpan(
+                                    ForegroundColorSpan(white),
+                                    0,
+                                    text.length,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                textViewResult.text = coloredText
+                                buttonMinus.isClickable = true
+                                buttonDot.isClickable = true
+                            }
+                        }.start()
                     } else {
                         if (!isMuted) {
                             val media = MediaPlayer.create(this, R.raw.minus)
@@ -250,32 +269,37 @@ class TrainActivity : AppCompatActivity() {
                         if (lastTrainSignal == text.length) {
                             buttonMinus.isClickable = false
                             buttonDot.isClickable = false
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                reps++
-                                if (last>= alphabet.length - 1) {
-                                    last += 1
-                                    reps = 4
-                                } else if (reps > 3) {
-                                    learnMode = false
-                                    textView.text = "Odgadnij literę"
-                                    reps = 0
-                                    last -= 3
-                                    textViewRandom.text = alphabet[last].toString()
-                                    textViewResult.text = ""
-                                    lastTrainSignal = 0
-                                    buttonMinus.isClickable = true
-                                    buttonDot.isClickable = true
-                                } else {
-                                    last++
 
-                                    textViewRandom.text = alphabet[last].toString()
-                                    textViewResult.text = getMorseCode(alphabet[last])
-                                    lastTrainSignal = 0
-                                    buttonMinus.isClickable = true
-                                    buttonDot.isClickable = true
+                            countDownTimer = object : CountDownTimer(1000,1000) {
+                                override fun onTick(millisUntilFinished: Long) {
                                 }
 
-                            }, 1000)
+                                override fun onFinish() {
+                                    reps++
+                                    if (last>= alphabet.length - 1) {
+                                        last += 1
+                                        reps = 4
+                                    } else if (reps > 3) {
+                                        learnMode = false
+                                        textView.text = "Odgadnij literę"
+                                        reps = 0
+                                        last -= 3
+                                        textViewRandom.text = alphabet[last].toString()
+                                        textViewResult.text = ""
+                                        lastTrainSignal = 0
+                                        buttonMinus.isClickable = true
+                                        buttonDot.isClickable = true
+                                    } else {
+                                        last++
+
+                                        textViewRandom.text = alphabet[last].toString()
+                                        textViewResult.text = getMorseCode(alphabet[last])
+                                        lastTrainSignal = 0
+                                        buttonMinus.isClickable = true
+                                        buttonDot.isClickable = true
+                                    }
+                                }
+                            }.start()
                         }
 
 
@@ -332,25 +356,29 @@ class TrainActivity : AppCompatActivity() {
             last = 0
             reps = 4
         }
-        Handler(Looper.getMainLooper()).postDelayed({
 
-            if (reps > 3) {
-                learnMode = true
-                textView.text = "Przepisz literę"
-                reps = 0
-
-                textViewResult.text = getMorseCode(alphabet[last])
-                lastTrainSignal = 0
-            } else {
-                textViewResult.text = ""
+        countDownTimer = object : CountDownTimer(1000,1000) {
+            override fun onTick(millisUntilFinished: Long) {
             }
-            textViewRandom.text = alphabet[last].toString()
-            textViewRandom.setTextColor(getColor(R.color.white))
-            buttonMinus.isClickable = true
-            buttonDot.isClickable = true
-            layout.isClickable = true
 
-        }, 1000)
+            override fun onFinish() {
+                if (reps > 3) {
+                    learnMode = true
+                    textView.text = "Przepisz literę"
+                    reps = 0
+
+                    textViewResult.text = getMorseCode(alphabet[last])
+                    lastTrainSignal = 0
+                } else {
+                    textViewResult.text = ""
+                }
+                textViewRandom.text = alphabet[last].toString()
+                textViewRandom.setTextColor(getColor(R.color.white))
+                buttonMinus.isClickable = true
+                buttonDot.isClickable = true
+                layout.isClickable = true
+            }
+        }.start()
     }
 
     override fun onDestroy() {
@@ -358,6 +386,9 @@ class TrainActivity : AppCompatActivity() {
         mediaPlayer?.release()
         mediaPlayer = null
         lastTrainSignal = 0
+        if (::countDownTimer.isInitialized) {
+            countDownTimer.cancel()
+        }
     }
 
     private fun playMediaQueue() {
