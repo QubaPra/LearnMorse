@@ -36,6 +36,10 @@ class TrainActivity : AppCompatActivity() {
     private lateinit var textView: TextView
     private lateinit var info: ImageView
 
+    private lateinit var tutorialView: ConstraintLayout
+    private lateinit var trainView: ConstraintLayout
+    private lateinit var closeTutorial: ImageView
+
     private var mediaPlayer: MediaPlayer? = null
     private val mediaQueue: MutableList<MediaPlayer> = mutableListOf()
 
@@ -55,6 +59,10 @@ class TrainActivity : AppCompatActivity() {
         layout = findViewById(R.id.content)
         home = findViewById(R.id.home)
         textView = findViewById(R.id.textView)
+        tutorialView = findViewById(R.id.tutorial)
+        trainView = findViewById(R.id.train)
+        closeTutorial = findViewById(R.id.closeTutorial)
+
         val sound = findViewById<ImageView>(R.id.sound)
         info = findViewById(R.id.info)
         if (!isMuted) {
@@ -77,6 +85,22 @@ class TrainActivity : AppCompatActivity() {
                 textView.text = "Przepisz literę"
                 textViewResult.text = getMorseCode(alphabet[last])
 
+            } else {
+                textView.text = "Odgadnij literę"
+                textViewResult.text = ""
+            }
+        }
+
+        closeTutorial.setOnClickListener {
+            countDownTimer.cancel()
+            trainView.visibility = View.VISIBLE
+            tutorialView.visibility = View.GONE
+            info.visibility = View.VISIBLE
+            isTrainTutorial = false
+            textViewRandom.text = alphabet[last].toString()
+            if (learnMode) {
+                textView.text = "Przepisz literę"
+                textViewResult.text = getMorseCode(alphabet[last])
             } else {
                 textView.text = "Odgadnij literę"
                 textViewResult.text = ""
@@ -431,8 +455,6 @@ class TrainActivity : AppCompatActivity() {
     }
     private fun tutorialAnimation() {
         lastTrainSignal = 0
-        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
-        val trainView = findViewById<ConstraintLayout>(R.id.train)
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
         val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
         textView.text = "Instrukcja"

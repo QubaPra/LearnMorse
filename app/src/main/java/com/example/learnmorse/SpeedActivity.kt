@@ -27,6 +27,10 @@ class SpeedActivity : AppCompatActivity() {
     private lateinit var layout: RelativeLayout
     private lateinit var home: ImageView
 
+    private lateinit var tutorialView: ConstraintLayout
+    private lateinit var speedLayout: ConstraintLayout
+    private lateinit var closeTutorial: ImageView
+
     private var randomChar = alphabet.random()
     private var morseCode = getMorseCode(randomChar)
 
@@ -46,6 +50,9 @@ class SpeedActivity : AppCompatActivity() {
         addTimeAmount = 1500
         subtractTimeAmount = 500
 
+        tutorialView = findViewById(R.id.tutorial)
+        speedLayout = findViewById(R.id.speedlayout)
+
         buttonDot = findViewById(R.id.button_dot)
         buttonMinus = findViewById(R.id.button_minus)
         textViewResult = findViewById(R.id.textview_result)
@@ -53,6 +60,7 @@ class SpeedActivity : AppCompatActivity() {
         textView = findViewById(R.id.textView)
         layout = findViewById(R.id.content)
         home = findViewById(R.id.home)
+        closeTutorial = findViewById(R.id.closeTutorial)
 
         countdownTextView = findViewById(R.id.time)
 
@@ -67,6 +75,15 @@ class SpeedActivity : AppCompatActivity() {
             timer()
             textViewRandom.text = randomChar.toString()
         }
+        closeTutorial.setOnClickListener {
+            animationTimer.cancel()
+            speedLayout.visibility = View.VISIBLE
+            tutorialView.visibility = View.GONE
+            isSpeedTutorial = false
+            textViewRandom.text = randomChar.toString()
+            timer()
+        }
+
 
         buttonDot.setOnClickListener {
             if (!isSpeedTutorial) {
@@ -202,8 +219,7 @@ class SpeedActivity : AppCompatActivity() {
 
 
     private fun tutorialAnimation() {
-        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
-        val speedLayout = findViewById<ConstraintLayout>(R.id.speedlayout)
+
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
         val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
         val timeBackground = findViewById<RelativeLayout>(R.id.timeBackground)

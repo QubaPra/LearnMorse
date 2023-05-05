@@ -30,6 +30,9 @@ class SendAutoActivity : AppCompatActivity() {
     private lateinit var buttonMinus: Button
     private lateinit var buttonSpace: Button
     private lateinit var buttonBack: Button
+    private lateinit var closeTutorial: ImageView
+    private lateinit var tutorialView: ConstraintLayout
+    private lateinit var sendView: ConstraintLayout
     private lateinit var info: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +61,21 @@ class SendAutoActivity : AppCompatActivity() {
         textView = findViewById(R.id.textView)
         buttonBack = findViewById(R.id.button_backspace)
         buttonStart = findViewById(R.id.button_start)
+        closeTutorial = findViewById(R.id.closeTutorial)
+        tutorialView = findViewById(R.id.tutorial)
+        sendView = findViewById(R.id.send)
 
         if (isSendTutorial){
             tutorialAnimation()
+        }
+
+        closeTutorial.setOnClickListener {
+            countDownTimer.cancel()
+            sendView.visibility = View.VISIBLE
+            tutorialView.visibility = View.GONE
+            info.visibility = View.VISIBLE
+            isSendTutorial = false
+            textView.text = "Wiadomość"
         }
 
         info.setOnClickListener {
@@ -262,8 +277,6 @@ class SendAutoActivity : AppCompatActivity() {
             lightOff()
             countDownTimer.cancel()
         }
-        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
-        val sendView = findViewById<ConstraintLayout>(R.id.send)
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
         textView.text = "Instrukcja"
         tutorialView.visibility = View.VISIBLE

@@ -24,6 +24,10 @@ class TestActivity : AppCompatActivity() {
     private lateinit var textView: TextView
     private lateinit var info: ImageView
 
+    private lateinit var tutorialView: ConstraintLayout
+    private lateinit var testView: ConstraintLayout
+    private lateinit var closeTutorial: ImageView
+
     private var mediaPlayer: MediaPlayer? = null
     private val mediaQueue: MutableList<MediaPlayer> = mutableListOf()
 
@@ -44,6 +48,10 @@ class TestActivity : AppCompatActivity() {
         home = findViewById(R.id.home)
         textView = findViewById(R.id.textView)
         info = findViewById(R.id.info)
+        tutorialView = findViewById(R.id.tutorial)
+        testView = findViewById(R.id.test)
+        closeTutorial = findViewById(R.id.closeTutorial)
+
         val sound = findViewById<ImageView>(R.id.sound)
         if (!isMuted) {
             sound.setImageResource(R.drawable.ic_unmute)
@@ -61,6 +69,17 @@ class TestActivity : AppCompatActivity() {
         else {
             textViewRandom.text = randomChar.toString()
         }
+
+        closeTutorial.setOnClickListener {
+            countDownTimer.cancel()
+            testView.visibility = View.VISIBLE
+            tutorialView.visibility = View.GONE
+            info.visibility = View.VISIBLE
+            isTestTutorial = false
+            textView.text = "Odgadnij literę"
+            textViewRandom.text = randomChar.toString()
+        }
+
             info.setOnClickListener {
                 if (!isTestTutorial) {
                     isTestTutorial = true
@@ -181,8 +200,6 @@ class TestActivity : AppCompatActivity() {
         }
     }
     private fun tutorialAnimation() {
-        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
-        val testView = findViewById<ConstraintLayout>(R.id.test)
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
         val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
         textView.text = "Instrukcja"

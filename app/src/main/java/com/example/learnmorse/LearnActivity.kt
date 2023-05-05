@@ -33,6 +33,10 @@ class LearnActivity : AppCompatActivity() {
     private lateinit var textView: TextView
     private lateinit var info: ImageView
 
+    private lateinit var closeTutorial: ImageView
+    private lateinit var tutorialView: ConstraintLayout
+    private lateinit var learnView: ConstraintLayout
+
     private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +46,9 @@ class LearnActivity : AppCompatActivity() {
         val green = ContextCompat.getColor(this, R.color.accent1)
         val red = ContextCompat.getColor(this, R.color.accent2)
         val white = ContextCompat.getColor(this, R.color.white)
+        closeTutorial = findViewById(R.id.closeTutorial)
+        tutorialView = findViewById(R.id.tutorial)
+        learnView = findViewById(R.id.learn)
         textViewRandom = findViewById(R.id.textview_random)
         textViewResult = findViewById(R.id.textview_result)
         buttonDot = findViewById(R.id.button_dot)
@@ -68,7 +75,17 @@ class LearnActivity : AppCompatActivity() {
             textViewRandom.text = alphabet[lastLetter].toString()
             textViewResult.text = getMorseCode(alphabet[lastLetter])
         }
-
+        closeTutorial.setOnClickListener {
+            countDownTimer.cancel()
+            learnView.visibility = View.VISIBLE
+            tutorialView.visibility = View.GONE
+            info.visibility = View.VISIBLE
+            isLearnTutorial = false
+            textView.text = "Przepisz literę"
+            // Change text of textViewRandom and textViewResult to 'A' in Morse code
+            textViewRandom.text = alphabet[lastLetter].toString()
+            textViewResult.text = getMorseCode(alphabet[lastLetter])
+        }
 
 
         sound.setOnClickListener {
@@ -292,8 +309,7 @@ class LearnActivity : AppCompatActivity() {
     }
     private fun tutorialAnimation() {
         lastSignal = 0
-        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
-        val learnView = findViewById<ConstraintLayout>(R.id.learn)
+
         textView.text = "Instrukcja"
         tutorialView.visibility = View.VISIBLE
         learnView.visibility = View.GONE
