@@ -5,10 +5,14 @@ import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+
+var isSendTutorial = true
 
 class SendAutoActivity : AppCompatActivity() {
 
@@ -19,9 +23,14 @@ class SendAutoActivity : AppCompatActivity() {
     private lateinit var cameraManager: CameraManager
     private var cameraId: String? = null
 
+    private lateinit var textViewResult: TextView
     private lateinit var textView: TextView
     private lateinit var buttonStart: Button
-
+    private lateinit var buttonDot: Button
+    private lateinit var buttonMinus: Button
+    private lateinit var buttonSpace: Button
+    private lateinit var buttonBack: Button
+    private lateinit var info: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_auto)
@@ -34,90 +43,105 @@ class SendAutoActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        val info = findViewById<ImageView>(R.id.info)
-        info.setOnClickListener {
-            //uzupełnić
-        }
+        info = findViewById(R.id.info)
+
 
         val home = findViewById<ImageView>(R.id.home)
         home.setOnClickListener {
             finish()
         }
 
-        val buttonMinus = findViewById<Button>(R.id.button_minus)
-        val buttonDot = findViewById<Button>(R.id.button_dot)
-        val buttonSpace = findViewById<Button>(R.id.button_space)
-        textView = findViewById(R.id.textview_result)
-        val buttonBack = findViewById<Button>(R.id.button_backspace)
+        buttonMinus = findViewById(R.id.button_minus)
+        buttonDot = findViewById(R.id.button_dot)
+        buttonSpace = findViewById(R.id.button_space)
+        textViewResult = findViewById(R.id.textview_result)
+        textView = findViewById(R.id.textView)
+        buttonBack = findViewById(R.id.button_backspace)
         buttonStart = findViewById(R.id.button_start)
 
+        if (isSendTutorial){
+            tutorialAnimation()
+        }
+
+        info.setOnClickListener {
+            if (!isSendTutorial) {
+                isSendTutorial = true
+                tutorialAnimation()
+            }
+        }
+
         buttonMinus.setOnClickListener {
-            if (textView.text.toString().substringAfterLast(" ").length < 4) {
-                textView.append("—")
+            if (textViewResult.text.toString().substringAfterLast(" ").length < 4 && !isSendTutorial) {
+                textViewResult.append("—")
             }
         }
         buttonDot.setOnClickListener {
-            if (textView.text.toString().substringAfterLast(" ").length < 4) {
-                textView.append("•")
+            if (textViewResult.text.toString().substringAfterLast(" ").length < 4 && !isSendTutorial) {
+                textViewResult.append("•")
             }
         }
         buttonSpace.setOnClickListener {
-            var text = textView.text.toString()
-            if (text.isNotEmpty()) {
-                if (!(text.length > 3 && text.substring(
-                        text.length - 3,
-                        text.length - 1
-                    ) == ". ")
-                ) {
-                    textView.append(" ")
-                    text = textView.text.toString()
-
-                    if (text.length > 3 && text.substring(
+            if (!isSendTutorial) {
+                var text = textViewResult.text.toString()
+                if (text.isNotEmpty()) {
+                    if (!(text.length > 3 && text.substring(
                             text.length - 3,
                             text.length - 1
-                        ) == "  "
+                        ) == ". ")
                     ) {
+                        textViewResult.append(" ")
+                        text = textViewResult.text.toString()
 
-                        textView.text = text.substring(0, text.length - 3) + ".  "
-                    } else {
-                        var letter = getNormalLetter(lastLetter(text)) + " "
-                        if (letter == "  " && lastLetter(text) != "") {
-                            letter = " "
+                        if (text.length > 3 && text.substring(
+                                text.length - 3,
+                                text.length - 1
+                            ) == "  "
+                        )
+
+                            textViewResult.text = text.substring(0, text.length - 3) + ".  "
+                        else {
+                            var letter = getNormalLetter(lastLetter(text)) + " "
+                            if (letter == "  " && lastLetter(text) != "") {
+                                letter = " "
+                            }
+                            if (text.substringBeforeLast(" ")
+                                    .substringBeforeLast(" ") == lastLetter(text)
+                            ) {
+                                textViewResult.text = letter
+                            } else
+                                textViewResult.text =
+                                    text.substringBeforeLast(" ").substringBeforeLast(" ") + letter
                         }
-                        if (text.substringBeforeLast(" ")
-                                .substringBeforeLast(" ") == lastLetter(text)
-                        ) {
-                            textView.text = letter
-                        } else
-                            textView.text =
-                                text.substringBeforeLast(" ").substringBeforeLast(" ") + letter
                     }
                 }
             }
         }
 
         buttonBack.setOnClickListener {
-            val text = textView.text.toString()
-            if (text.isNotEmpty()) {
-                if (text[text.length - 1] == ' ' && text.length > 1) {
-                    textView.text = text.substring(0, text.length - 2) + " "
-                } else if (text.isNotEmpty()) {
-                    textView.text = text.substring(0, text.length - 1)
+            if (!isSendTutorial) {
+                val text = textViewResult.text.toString()
+                if (text.isNotEmpty()) {
+                    if (text[text.length - 1] == ' ' && text.length > 1) {
+                        textViewResult.text = text.substring(0, text.length - 2) + " "
+                    } else if (text.isNotEmpty()) {
+                        textViewResult.text = text.substring(0, text.length - 1)
+                    }
+                }
+                if (text.length > 3 && text.substring(text.length - 3, text.length - 1) == ". ") {
+                    textViewResult.text = text.substring(0, text.length - 3) + "  "
                 }
             }
-            if (text.length > 3 && text.substring(text.length - 3, text.length - 1) == ". ") {
-                textView.text = text.substring(0, text.length - 3) + "  "
-            }
-
 
         }
         buttonBack.setOnLongClickListener {
-            textView.text = ""
+            if (!isSendTutorial) {
+                textViewResult.text = ""
+            }
             true
         }
         buttonStart.setOnClickListener {
 
-            if (textView.text.toString().isNotEmpty()) {
+            if (textViewResult.text.toString().isNotEmpty() && !isSendTutorial) {
                 translate()
                 if (buttonStart.text.toString() == "Start!") {
                     buttonStart.text = "Stop!"
@@ -194,7 +218,7 @@ class SendAutoActivity : AppCompatActivity() {
 
     private fun translate() {
         wiad = ""
-        val text = textView.text.toString()
+        val text = textViewResult.text.toString()
         for (i in text.indices) {
             if (text[i] == ' ' || text[i] == '.') {
                 wiad += " "
@@ -226,5 +250,58 @@ class SendAutoActivity : AppCompatActivity() {
             lightOff()
             countDownTimer.cancel()
         }
+        isSendTutorial = false
+
+        if (::countDownTimer.isInitialized) {
+            countDownTimer.cancel()
+        }
+    }
+
+    private fun tutorialAnimation() {
+        if (isSignal) {
+            lightOff()
+            countDownTimer.cancel()
+        }
+        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
+        val sendView = findViewById<ConstraintLayout>(R.id.send)
+        val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
+        textView.text = "Instrukcja"
+        tutorialView.visibility = View.VISIBLE
+        sendView.visibility = View.GONE
+        info.visibility = View.INVISIBLE
+
+        countDownTimer = object : CountDownTimer(29000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (((29000 - millisUntilFinished)*2)/1000/2.0) {
+                    0.0 -> tutorialTextView.text="Nadaj wiadomość używając przycisków na dole!"
+                    2.0 -> blinkAnimation(buttonDot)
+                    2.5 -> blinkAnimation(buttonMinus)
+                    3.0 -> blinkAnimation(buttonDot)
+                    3.5 -> blinkAnimation(buttonMinus)
+                    4.5 -> tutorialTextView.text="Aby zatwierdzić literę kliknij raz kreskę pionową!"
+                    6.5 -> blinkAnimation(buttonSpace)
+                    8.0 -> tutorialTextView.text="Następne naciśniecie kreski pionowej spowoduje zakończenie wyrazu!"
+                    11.0 -> blinkAnimation(buttonSpace)
+                    12.5 -> tutorialTextView.text="Trzecie naciśniecie kreski pionowej spowoduje zakończenie zdania!"
+                    15.0 -> blinkAnimation(buttonSpace)
+                    17.0 -> tutorialTextView.text="Naciśnij backspace aby zmazać ostatni znak!"
+                    19.0 -> blinkAnimation(buttonBack)
+                    21.0 -> tutorialTextView.text="Przytrzymaj backspace aby zmazać całą wiadomość!"
+                    23.0 -> longBlinkAnimation(buttonBack)
+                    25.5 -> tutorialTextView.text="Naciśnij Start! aby nadać wiadomość latarką!"
+                    27.5 -> blinkAnimation(buttonStart)
+                }
+            }
+
+            override fun onFinish() {
+                sendView.visibility = View.VISIBLE
+                tutorialView.visibility = View.GONE
+                info.visibility = View.VISIBLE
+                isSendTutorial = false
+                textView.text = "Wiadomość"
+
+            }
+        }.start()
+
     }
 }

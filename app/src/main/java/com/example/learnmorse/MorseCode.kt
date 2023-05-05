@@ -31,3 +31,11 @@ fun blinkAnimation(content:View) {
     blinkAnimation.repeatMode = Animation.REVERSE
     content.startAnimation(blinkAnimation)
 }
+
+fun longBlinkAnimation(content:View) {
+    val blinkAnimation = AlphaAnimation(1.0f, 0.0f)
+    blinkAnimation.duration = 500
+    blinkAnimation.repeatCount = 1
+    blinkAnimation.repeatMode = Animation.REVERSE
+    content.startAnimation(blinkAnimation)
+}
