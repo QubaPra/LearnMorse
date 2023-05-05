@@ -12,6 +12,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlin.math.IEEErem
+import kotlin.math.roundToInt
 
 var bestScore = "0 pkt"
 var score = "0 pkt"
@@ -30,6 +32,7 @@ class SpeedActivity : AppCompatActivity() {
 
     private lateinit var countdownTextView: TextView
     private lateinit var countDownTimer: CountDownTimer
+    private lateinit var animationTimer: CountDownTimer
     private var timeLeft: Long = 20000
     private var addTimeAmount: Long = 1500
     private var subtractTimeAmount: Long = 500
@@ -59,6 +62,7 @@ class SpeedActivity : AppCompatActivity() {
 
         if (isSpeedTutorial) {
             tutorialAnimation()
+
         } else {
             timer()
             textViewRandom.text = randomChar.toString()
@@ -139,7 +143,11 @@ class SpeedActivity : AppCompatActivity() {
                 buttonDot.isClickable = false
                 layout.isClickable = false
                 score = textView.text.toString()
-
+                Handler(Looper.getMainLooper()).postDelayed({
+                    val intent = Intent(this@SpeedActivity, SpeedEndActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }, 500)
             }
         }.start()
     }
@@ -191,10 +199,51 @@ class SpeedActivity : AppCompatActivity() {
     }
 
 
+
+
+    private fun tutorialAnimation() {
+        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
+        val speedLayout = findViewById<ConstraintLayout>(R.id.speedlayout)
+        val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
+        val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
+        val timeBackground = findViewById<RelativeLayout>(R.id.timeBackground)
+        val textView = findViewById<TextView>(R.id.textView)
+        tutorialView.visibility = View.VISIBLE
+        speedLayout.visibility = View.GONE
+
+        animationTimer = object : CountDownTimer(14500, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (((15000 - millisUntilFinished)*2)/1000/2.0) {
+                    2.0 -> blinkAnimation(buttonDot)
+                    2.5 -> blinkAnimation(buttonMinus)
+                    3.0 -> blinkAnimation(buttonDot)
+                    3.5 -> blinkAnimation(buttonMinus)
+                    4.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    6.0 -> blinkAnimation(tutorialContent)
+                    6.5 -> blinkAnimation(tutorialContent)
+                    7.5 -> tutorialTextView.text="Masz 20 sekund na zdobycie jak największej ilości punktów!"
+                    9.0 -> blinkAnimation(timeBackground)
+                    9.5 -> blinkAnimation(textView)
+                    10.5 -> tutorialTextView.text="Za każdą poprawną odpowiedź zyskujesz punkt i czas, za błędną go tracisz!"
+                }
+            }
+
+            override fun onFinish() {
+                speedLayout.visibility = View.VISIBLE
+                tutorialView.visibility = View.GONE
+                isSpeedTutorial = false
+                textViewRandom.text = randomChar.toString()
+                timer()
+            }
+        }.start()
+    }
     override fun onDestroy() {
         super.onDestroy()
         if (::countDownTimer.isInitialized) {
             countDownTimer.cancel()
+        }
+        if (::animationTimer.isInitialized) {
+            animationTimer.cancel()
         }
         isSpeedTutorial = false
         lastSignal = 0
@@ -206,58 +255,5 @@ class SpeedActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
         finish()
-    }
-
-    private fun tutorialAnimation() {
-        val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
-        val speedLayout = findViewById<ConstraintLayout>(R.id.speedlayout)
-        val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
-        val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
-        val timeBackground = findViewById<RelativeLayout>(R.id.timeBackground)
-        val textView = findViewById<TextView>(R.id.textView)
-        tutorialView.visibility = View.VISIBLE
-        speedLayout.visibility = View.GONE
-        Handler(Looper.getMainLooper()).postDelayed({
-            blinkAnimation(buttonDot)
-            Handler(Looper.getMainLooper()).postDelayed({
-                blinkAnimation(buttonMinus)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    blinkAnimation(buttonDot)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        blinkAnimation(buttonMinus)
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                blinkAnimation(tutorialContent)
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    blinkAnimation(tutorialContent)
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        tutorialTextView.text="Masz 20 sekund na zdobycie jak największej ilości punktów!"
-                                        Handler(Looper.getMainLooper()).postDelayed({
-                                            blinkAnimation(timeBackground)
-                                            Handler(Looper.getMainLooper()).postDelayed({
-                                                blinkAnimation(textView)
-                                                Handler(Looper.getMainLooper()).postDelayed({
-                                                    tutorialTextView.text="Za każdą poprawną odpowiedź zyskujesz punkt i czas, za błędną go tracisz!"
-                                                    Handler(Looper.getMainLooper()).postDelayed({
-                                                        speedLayout.visibility = View.VISIBLE
-                                                        tutorialView.visibility = View.GONE
-                                                        isSpeedTutorial = false
-                                                        textViewRandom.text = randomChar.toString()
-                                                        timer()
-                                                    }, 4000)
-                                                }, 2000)
-                                            }, 500)
-
-                                        }, 500)
-
-                                    }, 2000)
-                                }, 500)
-                            }, 500)
-                        }, 2000)
-                    }, 500)
-                }, 500)
-            }, 500)
-        }, 1000)
     }
 }
