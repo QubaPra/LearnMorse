@@ -68,17 +68,25 @@
         android:layout_height="94dp"
         android:layout_marginHorizontal="21dp"
         app:layout_constraintBottom_toTopOf="@+id/content"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:layout_editor_absoluteX="21dp">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/main1"
-            app:cardCornerRadius="19dp">
+            app:cardCornerRadius="19dp"
+            app:cardBackgroundColor="@color/background">
+
+            <RelativeLayout
+                android:id="@+id/timeBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main1"
+                />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/timeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -142,6 +150,7 @@
             app:cardCornerRadius="19dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/speedlayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/content">
@@ -182,6 +191,47 @@
                     app:layout_constraintTop_toBottomOf="@+id/textview_result" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tutorial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:id="@+id/tutorialContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/content" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_rules"
+                    app:layout_constraintBottom_toTopOf="@+id/tutorialTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tutorialTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="21dp"
+                    android:text="Odgadnij literę używając przycisków na dole!"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
@@ -204,7 +254,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
             android:layout_toEndOf="@+id/space"
-            android:paddingTop="16dp"
+            android:paddingTop="9dp"
             android:text="—"
             android:textColor="@color/accent1"
             android:textSize="50sp"
@@ -223,7 +273,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginEnd="0dp"
             android:layout_toStartOf="@+id/space"
-            android:paddingTop="16dp"
+            android:paddingTop="9dp"
             android:text="•"
             android:textColor="@color/accent1"
             android:textSize="50sp"

@@ -28,7 +28,11 @@ class SpeedStartActivity : AppCompatActivity() {
         }
         val info = findViewById<ImageView>(R.id.info)
         info.setOnClickListener {
-            //uzupełnić
+            isSpeedTutorial = true
+            val intent = Intent(this, SpeedActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
         }
     }
 }
