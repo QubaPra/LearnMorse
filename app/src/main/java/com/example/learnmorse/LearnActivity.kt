@@ -72,8 +72,8 @@ class LearnActivity : AppCompatActivity() {
             tutorialAnimation()
         }
         else {
-            textViewRandom.text = alphabet[lastLetter].toString()
-            textViewResult.text = getMorseCode(alphabet[lastLetter])
+            textViewRandom.text = learn_alphabet[lastLetter].toString()
+            textViewResult.text = getMorseCode(learn_alphabet[lastLetter])
         }
         closeTutorial.setOnClickListener {
             countDownTimer.cancel()
@@ -83,8 +83,8 @@ class LearnActivity : AppCompatActivity() {
             isLearnTutorial = false
             textView.text = "Przepisz literę"
             // Change text of textViewRandom and textViewResult to 'A' in Morse code
-            textViewRandom.text = alphabet[lastLetter].toString()
-            textViewResult.text = getMorseCode(alphabet[lastLetter])
+            textViewRandom.text = learn_alphabet[lastLetter].toString()
+            textViewResult.text = getMorseCode(learn_alphabet[lastLetter])
         }
 
 
@@ -172,11 +172,11 @@ class LearnActivity : AppCompatActivity() {
 
                                 override fun onFinish() {
                                     lastLetter++
-                                    if (lastLetter > alphabet.length - 1) {
+                                    if (lastLetter > learn_alphabet.length - 1) {
                                         lastLetter = 0
                                     }
-                                    textViewRandom.text = alphabet[lastLetter].toString()
-                                    textViewResult.text = getMorseCode(alphabet[lastLetter])
+                                    textViewRandom.text = learn_alphabet[lastLetter].toString()
+                                    textViewResult.text = getMorseCode(learn_alphabet[lastLetter])
                                     lastSignal = 0
                                     buttonMinus.isClickable = true
                                     buttonDot.isClickable = true
@@ -259,11 +259,11 @@ class LearnActivity : AppCompatActivity() {
 
                                 override fun onFinish() {
                                     lastLetter++
-                                    if (lastLetter > alphabet.length - 1) {
+                                    if (lastLetter > learn_alphabet.length - 1) {
                                         lastLetter = 0
                                     }
-                                    textViewRandom.text = alphabet[lastLetter].toString()
-                                    textViewResult.text = getMorseCode(alphabet[lastLetter])
+                                    textViewRandom.text = learn_alphabet[lastLetter].toString()
+                                    textViewResult.text = getMorseCode(learn_alphabet[lastLetter])
                                     lastSignal = 0
                                     buttonMinus.isClickable = true
                                     buttonDot.isClickable = true
@@ -332,8 +332,8 @@ class LearnActivity : AppCompatActivity() {
                 isLearnTutorial = false
                 textView.text = "Przepisz literę"
                 // Change text of textViewRandom and textViewResult to 'A' in Morse code
-                textViewRandom.text = alphabet[lastLetter].toString()
-                textViewResult.text = getMorseCode(alphabet[lastLetter])
+                textViewRandom.text = learn_alphabet[lastLetter].toString()
+                textViewResult.text = getMorseCode(learn_alphabet[lastLetter])
             }
         }.start()
 

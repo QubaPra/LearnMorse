@@ -188,11 +188,11 @@ class SendAutoActivity : AppCompatActivity() {
         var wait = false
 
         if (wiad[0] == '•') {
-            signalTime = 100
+            signalTime = (100.0 * lightSpeed).toLong()
         } else if (wiad[0] == '—') {
-            signalTime = 500
+            signalTime = (500.0 * lightSpeed).toLong()
         } else if (wiad[0] == '|' || wiad[0] == ' ') {
-            signalTime = 500
+            signalTime = (500.0 * lightSpeed).toLong()
             wait = true
         }
         wiad = wiad.substring(1, wiad.length)
@@ -207,7 +207,7 @@ class SendAutoActivity : AppCompatActivity() {
                 if (!wait) {
                     lightOn()
                 }
-                countDownTimer = object : CountDownTimer(signalTime, 100) {
+                countDownTimer = object : CountDownTimer(signalTime, 50) {
 
                     override fun onTick(millisUntilFinished: Long) {
                     }

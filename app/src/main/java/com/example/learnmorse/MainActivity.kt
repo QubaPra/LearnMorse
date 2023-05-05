@@ -9,8 +9,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
+var lightSpeed = 1.0
+var learn_alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
+var train_alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
+var alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

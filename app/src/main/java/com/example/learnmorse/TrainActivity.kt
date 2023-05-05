@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 
-const val alphabet = "ABCDEFGHIJKLMNOPRSTUWYZ"
+
 var last = 0
 var lastTrainSignal = 0
 var reps = 0
@@ -80,10 +80,10 @@ class TrainActivity : AppCompatActivity() {
             tutorialAnimation()
         }
         else {
-            textViewRandom.text = alphabet[last].toString()
+            textViewRandom.text = train_alphabet[last].toString()
             if (learnMode) {
                 textView.text = "Przepisz literę"
-                textViewResult.text = getMorseCode(alphabet[last])
+                textViewResult.text = getMorseCode(train_alphabet[last])
 
             } else {
                 textView.text = "Odgadnij literę"
@@ -97,10 +97,10 @@ class TrainActivity : AppCompatActivity() {
             tutorialView.visibility = View.GONE
             info.visibility = View.VISIBLE
             isTrainTutorial = false
-            textViewRandom.text = alphabet[last].toString()
+            textViewRandom.text = train_alphabet[last].toString()
             if (learnMode) {
                 textView.text = "Przepisz literę"
-                textViewResult.text = getMorseCode(alphabet[last])
+                textViewResult.text = getMorseCode(train_alphabet[last])
             } else {
                 textView.text = "Odgadnij literę"
                 textViewResult.text = ""
@@ -203,7 +203,7 @@ class TrainActivity : AppCompatActivity() {
 
                                     override fun onFinish() {
                                         reps++
-                                        if (last >= alphabet.length - 1) {
+                                        if (last >= train_alphabet.length - 1) {
                                             last += 1
                                             reps = 4
                                         }
@@ -212,15 +212,15 @@ class TrainActivity : AppCompatActivity() {
                                             textView.text = "Odgadnij literę"
                                             reps = 0
                                             last -= 3
-                                            textViewRandom.text = alphabet[last].toString()
+                                            textViewRandom.text = train_alphabet[last].toString()
                                             textViewResult.text = ""
                                             lastTrainSignal = 0
                                             buttonMinus.isClickable = true
                                             buttonDot.isClickable = true
                                         } else {
                                             last++
-                                            textViewRandom.text = alphabet[last].toString()
-                                            textViewResult.text = getMorseCode(alphabet[last])
+                                            textViewRandom.text = train_alphabet[last].toString()
+                                            textViewResult.text = getMorseCode(train_alphabet[last])
                                             lastTrainSignal = 0
                                             buttonMinus.isClickable = true
                                             buttonDot.isClickable = true
@@ -247,6 +247,10 @@ class TrainActivity : AppCompatActivity() {
         }
 
         layout.setOnClickListener {
+            println(tries)
+            println(reps)
+            println(last)
+            println(train_alphabet[last])
             if (!learnMode && !isTrainTutorial) {
                 checkResult()
             }
@@ -254,6 +258,7 @@ class TrainActivity : AppCompatActivity() {
         }
 
         buttonMinus.setOnClickListener {
+
             if (!isTrainTutorial) {
                 if (learnMode) {
                     val text = textViewResult.text
@@ -323,7 +328,7 @@ class TrainActivity : AppCompatActivity() {
 
                                     override fun onFinish() {
                                         reps++
-                                        if (last >= alphabet.length - 1) {
+                                        if (last >= train_alphabet.length - 1) {
                                             last += 1
                                             reps = 4
                                         } else if (reps > 3) {
@@ -331,7 +336,7 @@ class TrainActivity : AppCompatActivity() {
                                             textView.text = "Odgadnij literę"
                                             reps = 0
                                             last -= 3
-                                            textViewRandom.text = alphabet[last].toString()
+                                            textViewRandom.text = train_alphabet[last].toString()
                                             textViewResult.text = ""
                                             lastTrainSignal = 0
                                             buttonMinus.isClickable = true
@@ -339,8 +344,8 @@ class TrainActivity : AppCompatActivity() {
                                         } else {
                                             last++
 
-                                            textViewRandom.text = alphabet[last].toString()
-                                            textViewResult.text = getMorseCode(alphabet[last])
+                                            textViewRandom.text = train_alphabet[last].toString()
+                                            textViewResult.text = getMorseCode(train_alphabet[last])
                                             lastTrainSignal = 0
                                             buttonMinus.isClickable = true
                                             buttonDot.isClickable = true
@@ -377,11 +382,12 @@ class TrainActivity : AppCompatActivity() {
     }
 
     private fun checkResult() {
+
         val input = textViewResult.text.toString()
-        if (input == getMorseCode(alphabet[last])) {
+        if (input == getMorseCode(train_alphabet[last])) {
             textViewRandom.setTextColor(getColor(R.color.accent1))
             tries = 0
-            if (last>= alphabet.length - 1) {
+            if (last>= train_alphabet.length - 1) {
                 reps = 4
             } else {
                 last++
@@ -399,7 +405,7 @@ class TrainActivity : AppCompatActivity() {
         buttonMinus.isClickable = false
         buttonDot.isClickable = false
         layout.isClickable = false
-        if (last> alphabet.length - 1) {
+        if (last> train_alphabet.length - 1) {
             last = 0
             reps = 4
         }
@@ -414,12 +420,12 @@ class TrainActivity : AppCompatActivity() {
                     textView.text = "Przepisz literę"
                     reps = 0
 
-                    textViewResult.text = getMorseCode(alphabet[last])
+                    textViewResult.text = getMorseCode(train_alphabet[last])
                     lastTrainSignal = 0
                 } else {
                     textViewResult.text = ""
                 }
-                textViewRandom.text = alphabet[last].toString()
+                textViewRandom.text = train_alphabet[last].toString()
                 textViewRandom.setTextColor(getColor(R.color.white))
                 buttonMinus.isClickable = true
                 buttonDot.isClickable = true
@@ -483,10 +489,10 @@ class TrainActivity : AppCompatActivity() {
                 info.visibility = View.VISIBLE
                 isTrainTutorial = false
 
-                textViewRandom.text = alphabet[last].toString()
+                textViewRandom.text = train_alphabet[last].toString()
                 if (learnMode) {
                     textView.text = "Przepisz literę"
-                    textViewResult.text = getMorseCode(alphabet[last])
+                    textViewResult.text = getMorseCode(train_alphabet[last])
 
                 } else {
                     textView.text = "Odgadnij literę"
