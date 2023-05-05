@@ -58,6 +58,9 @@ class TestActivity : AppCompatActivity() {
         if (isTestTutorial) {
             tutorialAnimation()
         }
+        else {
+            textViewRandom.text = randomChar.toString()
+        }
             info.setOnClickListener {
                 if (!isTestTutorial) {
                     isTestTutorial = true
@@ -76,7 +79,7 @@ class TestActivity : AppCompatActivity() {
                 }
             }
 
-            textViewRandom.text = randomChar.toString()
+
 
             buttonDot.setOnClickListener {
                 if (!isTestTutorial) {
@@ -190,6 +193,7 @@ class TestActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(8000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 when (((8000 - millisUntilFinished)*2)/1000/2.0) {
+                    0.0 -> tutorialTextView.text="Odgadnij literę używając przycisków na dole!"
                     2.0 -> blinkAnimation(buttonDot)
                     2.5 -> blinkAnimation(buttonMinus)
                     3.0 -> blinkAnimation(buttonDot)
@@ -206,6 +210,7 @@ class TestActivity : AppCompatActivity() {
                 info.visibility = View.VISIBLE
                 isTestTutorial = false
                 textView.text = "Odgadnij literę"
+                textViewRandom.text = randomChar.toString()
             }
         }.start()
 

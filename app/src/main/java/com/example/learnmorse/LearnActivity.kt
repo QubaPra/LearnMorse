@@ -3,8 +3,7 @@ package com.example.learnmorse
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.CountDownTimer
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextUtils
@@ -33,6 +32,8 @@ class LearnActivity : AppCompatActivity() {
     private lateinit var home: ImageView
     private lateinit var textView: TextView
     private lateinit var info: ImageView
+
+    private lateinit var countDownTimer: CountDownTimer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,19 +119,26 @@ class LearnActivity : AppCompatActivity() {
                     if (color == red) {
                         buttonMinus.isClickable = false
                         buttonDot.isClickable = false
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            lastSignal = 0
-                            val coloredText = SpannableString(text)
-                            coloredText.setSpan(
-                                ForegroundColorSpan(white),
-                                0,
-                                text.length,
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                            )
-                            textViewResult.text = coloredText
-                            buttonMinus.isClickable = true
-                            buttonDot.isClickable = true
-                        }, 1000)
+
+                        countDownTimer = object : CountDownTimer(1000, 1000) {
+                            override fun onTick(millisUntilFinished: Long) {
+                            }
+
+                            override fun onFinish() {
+                                lastSignal = 0
+                                val coloredText = SpannableString(text)
+                                coloredText.setSpan(
+                                    ForegroundColorSpan(white),
+                                    0,
+                                    text.length,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                textViewResult.text = coloredText
+                                buttonMinus.isClickable = true
+                                buttonDot.isClickable = true
+                            }
+                        }.start()
+
                     } else {
                         if (!isMuted) {
                             val media = MediaPlayer.create(this, R.raw.dot)
@@ -140,17 +148,23 @@ class LearnActivity : AppCompatActivity() {
                         if (lastSignal == text.length) {
                             buttonMinus.isClickable = false
                             buttonDot.isClickable = false
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                lastLetter++
-                                if (lastLetter > alphabet.length - 1) {
-                                    lastLetter = 0
+
+                            countDownTimer = object : CountDownTimer(1000, 1000) {
+                                override fun onTick(millisUntilFinished: Long) {
                                 }
-                                textViewRandom.text = alphabet[lastLetter].toString()
-                                textViewResult.text = getMorseCode(alphabet[lastLetter])
-                                lastSignal = 0
-                                buttonMinus.isClickable = true
-                                buttonDot.isClickable = true
-                            }, 1000)
+
+                                override fun onFinish() {
+                                    lastLetter++
+                                    if (lastLetter > alphabet.length - 1) {
+                                        lastLetter = 0
+                                    }
+                                    textViewRandom.text = alphabet[lastLetter].toString()
+                                    textViewResult.text = getMorseCode(alphabet[lastLetter])
+                                    lastSignal = 0
+                                    buttonMinus.isClickable = true
+                                    buttonDot.isClickable = true
+                                }
+                            }.start()
                         }
 
                     }
@@ -192,19 +206,26 @@ class LearnActivity : AppCompatActivity() {
                     if (color == red) {
                         buttonMinus.isClickable = false
                         buttonDot.isClickable = false
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            lastSignal = 0
-                            val coloredText = SpannableString(text)
-                            coloredText.setSpan(
-                                ForegroundColorSpan(white),
-                                0,
-                                text.length,
-                                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                            )
-                            textViewResult.text = coloredText
-                            buttonMinus.isClickable = true
-                            buttonDot.isClickable = true
-                        }, 1000)
+
+                        countDownTimer = object : CountDownTimer(1000, 1000) {
+                            override fun onTick(millisUntilFinished: Long) {
+                            }
+
+                            override fun onFinish() {
+                                lastSignal = 0
+                                val coloredText = SpannableString(text)
+                                coloredText.setSpan(
+                                    ForegroundColorSpan(white),
+                                    0,
+                                    text.length,
+                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                                )
+                                textViewResult.text = coloredText
+                                buttonMinus.isClickable = true
+                                buttonDot.isClickable = true
+                            }
+                        }.start()
+
                     } else {
                         if (!isMuted) {
                             val media = MediaPlayer.create(this, R.raw.minus)
@@ -214,17 +235,23 @@ class LearnActivity : AppCompatActivity() {
                         if (lastSignal == text.length) {
                             buttonMinus.isClickable = false
                             buttonDot.isClickable = false
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                lastLetter++
-                                if (lastLetter > alphabet.length - 1) {
-                                    lastLetter = 0
+
+                            countDownTimer = object : CountDownTimer(1000, 1000) {
+                                override fun onTick(millisUntilFinished: Long) {
                                 }
-                                textViewRandom.text = alphabet[lastLetter].toString()
-                                textViewResult.text = getMorseCode(alphabet[lastLetter])
-                                lastSignal = 0
-                                buttonMinus.isClickable = true
-                                buttonDot.isClickable = true
-                            }, 1000)
+
+                                override fun onFinish() {
+                                    lastLetter++
+                                    if (lastLetter > alphabet.length - 1) {
+                                        lastLetter = 0
+                                    }
+                                    textViewRandom.text = alphabet[lastLetter].toString()
+                                    textViewResult.text = getMorseCode(alphabet[lastLetter])
+                                    lastSignal = 0
+                                    buttonMinus.isClickable = true
+                                    buttonDot.isClickable = true
+                                }
+                            }.start()
                         }
                     }
                 }
@@ -248,6 +275,9 @@ class LearnActivity : AppCompatActivity() {
         {
             isLearnTutorial = false
         }
+        if (::countDownTimer.isInitialized) {
+            countDownTimer.cancel()
+        }
     }
     private fun playMediaQueue() {
         if (mediaQueue.isNotEmpty() && mediaPlayer == null) {
@@ -261,34 +291,36 @@ class LearnActivity : AppCompatActivity() {
         }
     }
     private fun tutorialAnimation() {
+        lastSignal = 0
         val tutorialView = findViewById<ConstraintLayout>(R.id.tutorial)
         val learnView = findViewById<ConstraintLayout>(R.id.learn)
         textView.text = "Instrukcja"
         tutorialView.visibility = View.VISIBLE
         learnView.visibility = View.GONE
         info.visibility = View.INVISIBLE
-        Handler(Looper.getMainLooper()).postDelayed({
-            blinkAnimation(buttonDot)
-            Handler(Looper.getMainLooper()).postDelayed({
-                blinkAnimation(buttonMinus)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    blinkAnimation(buttonDot)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        blinkAnimation(buttonMinus)
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            learnView.visibility = View.VISIBLE
-                            tutorialView.visibility = View.GONE
-                            info.visibility = View.VISIBLE
-                            isLearnTutorial = false
-                            textView.text = "Przepisz literę"
-                            // Change text of textViewRandom and textViewResult to 'A' in Morse code
-                            textViewRandom.text = alphabet[lastLetter].toString()
-                            textViewResult.text = getMorseCode(alphabet[lastLetter])
-                            }, 2000)
-                        }, 500)
-                    }, 500)
-                }, 500)
-            }, 1000)
+
+        countDownTimer = object : CountDownTimer(5000, 500) {
+            override fun onTick(millisUntilFinished: Long) {
+                when (((5000 - millisUntilFinished)*2)/1000/2.0) {
+                    2.0 -> blinkAnimation(buttonDot)
+                    2.5 -> blinkAnimation(buttonMinus)
+                    3.0 -> blinkAnimation(buttonDot)
+                    3.5 -> blinkAnimation(buttonMinus)
+                }
+            }
+
+            override fun onFinish() {
+                learnView.visibility = View.VISIBLE
+                tutorialView.visibility = View.GONE
+                info.visibility = View.VISIBLE
+                isLearnTutorial = false
+                textView.text = "Przepisz literę"
+                // Change text of textViewRandom and textViewResult to 'A' in Morse code
+                textViewRandom.text = alphabet[lastLetter].toString()
+                textViewResult.text = getMorseCode(alphabet[lastLetter])
+            }
+        }.start()
+
     }
 
 }

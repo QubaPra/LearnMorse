@@ -214,6 +214,7 @@ class SpeedActivity : AppCompatActivity() {
         animationTimer = object : CountDownTimer(14500, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 when (((14500 - millisUntilFinished)*2)/1000/2.0) {
+                    0.0 -> tutorialTextView.text="Odgadnij literę używając przycisków na dole!"
                     2.0 -> blinkAnimation(buttonDot)
                     2.5 -> blinkAnimation(buttonMinus)
                     3.0 -> blinkAnimation(buttonDot)
