@@ -64,10 +64,6 @@ class SpeedActivity : AppCompatActivity() {
             textViewRandom.text = randomChar.toString()
         }
 
-
-
-
-
         buttonDot.setOnClickListener {
             if (!isSpeedTutorial) {
                 if (textViewResult.text.length < 4) {
@@ -129,29 +125,23 @@ class SpeedActivity : AppCompatActivity() {
     }
 
     private fun timer() {
-        if (!isSpeedEnd) {
-            countDownTimer = object : CountDownTimer(timeLeft, 100) {
+        countDownTimer = object : CountDownTimer(timeLeft, 100) {
 
-                override fun onTick(millisUntilFinished: Long) {
-                    val secondsLeft = ((millisUntilFinished / 1000)).toString()
-                    val millisecondsLeft = (millisUntilFinished % 1000 / 100).toString()
-                    countdownTextView.text = "$secondsLeft.$millisecondsLeft"
-                }
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = ((millisUntilFinished / 1000)).toString()
+                val millisecondsLeft = (millisUntilFinished % 1000 / 100).toString()
+                countdownTextView.text = "$secondsLeft.$millisecondsLeft"
+            }
 
-                override fun onFinish() {
-                    countdownTextView.text = "Koniec!"
-                    buttonMinus.isClickable = false
-                    buttonDot.isClickable = false
-                    layout.isClickable = false
-                    score = textView.text.toString()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        val intent = Intent(this@SpeedActivity, SpeedEndActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }, 500)
-                }
-            }.start()
-        }
+            override fun onFinish() {
+                countdownTextView.text = "Koniec!"
+                buttonMinus.isClickable = false
+                buttonDot.isClickable = false
+                layout.isClickable = false
+                score = textView.text.toString()
+
+            }
+        }.start()
     }
 
     private fun addTime() {
@@ -160,9 +150,7 @@ class SpeedActivity : AppCompatActivity() {
             timeLeft = (countdownTextView.text.toString().toDouble() * 1000).toLong()
         }
         timeLeft += addTimeAmount
-        if (::countDownTimer.isInitialized) {
-            countDownTimer.cancel()
-        }
+        countDownTimer.cancel()
         if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
             timer()
         } else {
@@ -185,9 +173,7 @@ class SpeedActivity : AppCompatActivity() {
             timeLeft = (countdownTextView.text.toString().toDouble() * 1000).toLong()
         }
         timeLeft -= subtractTimeAmount
-        if (::countDownTimer.isInitialized) {
-            countDownTimer.cancel()
-        }
+        countDownTimer.cancel()
         if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
             timer()
         } else {
@@ -207,16 +193,15 @@ class SpeedActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (!isSpeedTutorial) {
-            if (::countDownTimer.isInitialized) {
-                countDownTimer.cancel()
-            }
+        if (::countDownTimer.isInitialized) {
+            countDownTimer.cancel()
         }
         isSpeedTutorial = false
         lastSignal = 0
         finish()
     }
     override fun onBackPressed() {
+        isSpeedTutorial = false
         val intent = Intent(this, SpeedStartActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)

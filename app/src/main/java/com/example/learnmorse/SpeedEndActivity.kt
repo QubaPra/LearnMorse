@@ -7,13 +7,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
-var isSpeedEnd = false
-
 class SpeedEndActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speed_end)
-        isSpeedEnd = true
 
         if (bestScore.filter { it.isDigit() }.toInt() < score.filter { it.isDigit() }.toInt()) {
             bestScore = score
@@ -27,14 +24,12 @@ class SpeedEndActivity : AppCompatActivity() {
 
         val home = findViewById<ImageView>(R.id.home)
         home.setOnClickListener {
-            isSpeedEnd = false
             finish()
         }
 
         val info = findViewById<ImageView>(R.id.info)
         info.setOnClickListener {
             isSpeedTutorial = true
-            isSpeedEnd = false
             val intent = Intent(this, SpeedActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
@@ -43,7 +38,6 @@ class SpeedEndActivity : AppCompatActivity() {
 
         val restart = findViewById<Button>(R.id.button)
         restart.setOnClickListener {
-            isSpeedEnd = false
             val intent = Intent(this, SpeedActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
