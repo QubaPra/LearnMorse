@@ -161,7 +161,7 @@ class SpeedActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                countdownTextView.text = "Koniec!"
+                countdownTextView.text = getString(R.string.speedTimeEnd)
                 buttonMinus.isClickable = false
                 buttonDot.isClickable = false
                 layout.isClickable = false
@@ -176,16 +176,16 @@ class SpeedActivity : AppCompatActivity() {
     }
 
     private fun addTime() {
-        if (countdownTextView.text != "Koniec!")
+        if (countdownTextView.text != getString(R.string.speedTimeEnd))
         {
             timeLeft = (countdownTextView.text.toString().toDouble() * 1000).toLong()
         }
         timeLeft += addTimeAmount
         countDownTimer.cancel()
-        if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
+        if (timeLeft > 0 && countdownTextView.text != getString(R.string.speedTimeEnd)) {
             timer()
         } else {
-            countdownTextView.text = "Koniec!"
+            countdownTextView.text = getString(R.string.speedTimeEnd)
             buttonMinus.isClickable = false
             buttonDot.isClickable = false
             layout.isClickable = false
@@ -199,16 +199,16 @@ class SpeedActivity : AppCompatActivity() {
     }
 
     private fun subtractTime() {
-        if (countdownTextView.text != "Koniec!")
+        if (countdownTextView.text != getString(R.string.speedTimeEnd))
         {
             timeLeft = (countdownTextView.text.toString().toDouble() * 1000).toLong()
         }
         timeLeft -= subtractTimeAmount
         countDownTimer.cancel()
-        if (timeLeft > 0 && countdownTextView.text != "Koniec!") {
+        if (timeLeft > 0 && countdownTextView.text != getString(R.string.speedTimeEnd)) {
             timer()
         } else {
-            countdownTextView.text = "Koniec!"
+            countdownTextView.text = getString(R.string.speedTimeEnd)
             buttonMinus.isClickable = false
             buttonDot.isClickable = false
             layout.isClickable = false
@@ -236,18 +236,18 @@ class SpeedActivity : AppCompatActivity() {
         animationTimer = object : CountDownTimer(26000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 when (((26000 - millisUntilFinished)*2)/1000/2.0) {
-                    0.0 -> tutorialTextView.text="Odgadnij literę używając przycisków na dole!"
+                    0.0 -> tutorialTextView.text=getString(R.string.speedTutorial1)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
                     4.0 -> blinkAnimation(buttonDot)
                     4.5 -> blinkAnimation(buttonMinus)
-                    6.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    6.5 -> tutorialTextView.text=getString(R.string.speedTutorial2)
                     9.0 -> blinkAnimation(tutorialContent)
                     10.0 -> blinkAnimation(tutorialContent)
-                    12.5 -> tutorialTextView.text="Masz 20 sekund na zdobycie jak największej ilości punktów!"
+                    12.5 -> tutorialTextView.text=getString(R.string.speedTutorial3)
                     15.0 -> blinkAnimation(timeBackground)
                     16.0 -> blinkAnimation(textView)
-                    18.5 -> tutorialTextView.text="Za każdą poprawną odpowiedź zyskujesz punkt i czas, za błędną go tracisz!"
+                    18.5 -> tutorialTextView.text=getString(R.string.speedTutorial4)
                 }
             }
 

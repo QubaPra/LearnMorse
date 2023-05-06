@@ -84,7 +84,7 @@ class SendAutoActivity : AppCompatActivity() {
             tutorialView.visibility = View.GONE
             info.visibility = View.VISIBLE
             isSendTutorial = false
-            textView.text = "Wiadomość"
+            textView.text = getString(R.string.sendTextView)
         }
 
         info.setOnClickListener {
@@ -167,13 +167,13 @@ class SendAutoActivity : AppCompatActivity() {
 
             if (textViewResult.text.toString().isNotEmpty() && !isSendTutorial) {
                 translate()
-                if (buttonStart.text.toString() == "Nadaj!") {
-                    buttonStart.text = "Stop!"
+                if (buttonStart.text.toString() == getString(R.string.sendButton)) {
+                    buttonStart.text = getString(R.string.sendButtonOff)
                     isSignal = true
                     lightTimer()
 
                 } else {
-                    buttonStart.text = "Nadaj!"
+                    buttonStart.text = getString(R.string.sendButton)
                     lightOff()
                     countDownTimer.cancel()
                 }
@@ -230,7 +230,7 @@ class SendAutoActivity : AppCompatActivity() {
                             lightTimer()
                         } else {
                             isSignal = false
-                            buttonStart.text = "Nadaj!"
+                            buttonStart.text = getString(R.string.sendButton)
                             countDownTimer.cancel()
                         }
                     }
@@ -287,7 +287,7 @@ class SendAutoActivity : AppCompatActivity() {
             countDownTimer.cancel()
         }
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
-        textView.text = "Instrukcja"
+        textView.text = getString(R.string.sendInfoTextView)
         tutorialView.visibility = View.VISIBLE
         sendView.visibility = View.GONE
         info.visibility = View.INVISIBLE
@@ -295,22 +295,22 @@ class SendAutoActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(43000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 when (((43000 - millisUntilFinished)*2)/1000/2.0) {
-                    0.0 -> tutorialTextView.text="Nadaj wiadomość używając przycisków na dole!"
+                    0.0 -> tutorialTextView.text=getString(R.string.nadaj_tutorial1)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
                     4.0 -> blinkAnimation(buttonDot)
                     4.5 -> blinkAnimation(buttonMinus)
-                    6.5 -> tutorialTextView.text="Aby zatwierdzić literę kliknij raz kreskę pionową!"
+                    6.5 -> tutorialTextView.text=getString(R.string.nadaj_tutorial2)
                     10.5 -> blinkAnimation(buttonSpace)
-                    12.0 -> tutorialTextView.text="Następne naciśniecie kreski pionowej spowoduje zakończenie wyrazu!"
+                    12.0 -> tutorialTextView.text=getString(R.string.nadaj_tutorial3)
                     16.0 -> blinkAnimation(buttonSpace)
-                    18.0 -> tutorialTextView.text="Trzecie naciśniecie kreski pionowej spowoduje zakończenie zdania!"
+                    18.0 -> tutorialTextView.text=getString(R.string.nadaj_tutorial4)
                     22.0 -> blinkAnimation(buttonSpace)
-                    24.0 -> tutorialTextView.text="Naciśnij backspace aby zmazać ostatni znak!"
+                    24.0 -> tutorialTextView.text=getString(R.string.nadaj_tutorial5)
                     28.0 -> blinkAnimation(buttonBack)
-                    30.0 -> tutorialTextView.text="Przytrzymaj backspace aby zmazać całą wiadomość!"
+                    30.0 -> tutorialTextView.text=getString(R.string.nadaj_tutorial6)
                     34.0 -> longBlinkAnimation(buttonBack)
-                    36.0 -> tutorialTextView.text="Naciśnij Nadaj! aby nadać wiadomość latarką!"
+                    36.0 -> tutorialTextView.text=getString(R.string.nadaj_tutorial7)
                     40.0 -> blinkAnimation(buttonStart)
                 }
             }
@@ -320,7 +320,7 @@ class SendAutoActivity : AppCompatActivity() {
                 tutorialView.visibility = View.GONE
                 info.visibility = View.VISIBLE
                 isSendTutorial = false
-                textView.text = "Wiadomość"
+                textView.text = getString(R.string.sendTextView)
 
             }
         }.start()

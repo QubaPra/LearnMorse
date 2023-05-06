@@ -24,7 +24,7 @@
             android:layout_marginStart="21dp"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
-            android:text="Speed"
+            android:text="@string/speedName"
             android:textColor="@color/white"
             android:textSize="50sp"
             android:textStyle="bold"

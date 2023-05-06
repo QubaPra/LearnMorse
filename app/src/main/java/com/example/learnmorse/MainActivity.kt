@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         zasadyButton.setOnLongClickListener {
-            val toast = Toast.makeText(this, "Twórcą aplikacji jest Jakub Prażuch", Toast.LENGTH_SHORT)
+            val toast = Toast.makeText(this, getString(R.string.authorInfo), Toast.LENGTH_SHORT)
             toast.show()
             true
         }

@@ -90,11 +90,11 @@ class TrainActivity : AppCompatActivity() {
         else {
             textViewRandom.text = train_alphabet[last].toString()
             if (learnMode) {
-                textView.text = "Przepisz literę"
+                textView.text = getString(R.string.trainTextViewLearn)
                 textViewResult.text = getMorseCode(train_alphabet[last])
 
             } else {
-                textView.text = "Odgadnij literę"
+                textView.text = getString(R.string.trainTextViewTest)
                 textViewResult.text = ""
             }
         }
@@ -107,10 +107,10 @@ class TrainActivity : AppCompatActivity() {
             isTrainTutorial = false
             textViewRandom.text = train_alphabet[last].toString()
             if (learnMode) {
-                textView.text = "Przepisz literę"
+                textView.text = getString(R.string.trainTextViewLearn)
                 textViewResult.text = getMorseCode(train_alphabet[last])
             } else {
-                textView.text = "Odgadnij literę"
+                textView.text = getString(R.string.trainTextViewTest)
                 textViewResult.text = ""
             }
         }
@@ -217,7 +217,7 @@ class TrainActivity : AppCompatActivity() {
                                         }
                                         if (reps > 3) {
                                             learnMode = false
-                                            textView.text = "Odgadnij literę"
+                                            textView.text = getString(R.string.trainTextViewTest)
                                             reps = 0
                                             last -= 3
                                             textViewRandom.text = train_alphabet[last].toString()
@@ -337,7 +337,7 @@ class TrainActivity : AppCompatActivity() {
                                             reps = 4
                                         } else if (reps > 3) {
                                             learnMode = false
-                                            textView.text = "Odgadnij literę"
+                                            textView.text = getString(R.string.trainTextViewTest)
                                             reps = 0
                                             last -= 3
                                             textViewRandom.text = train_alphabet[last].toString()
@@ -421,7 +421,7 @@ class TrainActivity : AppCompatActivity() {
             override fun onFinish() {
                 if (reps > 3) {
                     learnMode = true
-                    textView.text = "Przepisz literę"
+                    textView.text = getString(R.string.trainTextViewLearn)
                     reps = 0
 
                     textViewResult.text = getMorseCode(train_alphabet[last])
@@ -467,7 +467,7 @@ class TrainActivity : AppCompatActivity() {
         lastTrainSignal = 0
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
         val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
-        textView.text = "Instrukcja"
+        textView.text = getString(R.string.trainInfoTextView)
         tutorialView.visibility = View.VISIBLE
         trainView.visibility = View.GONE
         info.visibility = View.INVISIBLE
@@ -475,13 +475,13 @@ class TrainActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(19000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 when (((18000 - millisUntilFinished)*2)/1000/2.0) {
-                    0.0 -> tutorialTextView.text="Przepisz 4 litery używając przycisków na dole!"
+                    0.0 -> tutorialTextView.text=getString(R.string.trainTutorial1)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
                     4.0 -> blinkAnimation(buttonDot)
                     4.5 -> blinkAnimation(buttonMinus)
-                    6.5 -> tutorialTextView.text="Następnie odgadnij te litery używając przycisków na dole!"
-                    12.0 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    6.5 -> tutorialTextView.text=getString(R.string.trainTutorial2)
+                    12.0 -> tutorialTextView.text=getString(R.string.trainTutorial3)
                     16.0 -> blinkAnimation(tutorialContent)
                     17.0 -> blinkAnimation(tutorialContent)
                 }
@@ -495,11 +495,11 @@ class TrainActivity : AppCompatActivity() {
 
                 textViewRandom.text = train_alphabet[last].toString()
                 if (learnMode) {
-                    textView.text = "Przepisz literę"
+                    textView.text = getString(R.string.trainTextViewLearn)
                     textViewResult.text = getMorseCode(train_alphabet[last])
 
                 } else {
-                    textView.text = "Odgadnij literę"
+                    textView.text = getString(R.string.trainTextViewTest)
                     textViewResult.text = ""
                 }
             }

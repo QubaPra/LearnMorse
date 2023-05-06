@@ -89,7 +89,7 @@ class LearnActivity : AppCompatActivity() {
             tutorialView.visibility = View.GONE
             info.visibility = View.VISIBLE
             isLearnTutorial = false
-            textView.text = "Przepisz literę"
+            textView.text = getString(R.string.learnTextViewLearn)
             // Change text of textViewRandom and textViewResult to 'A' in Morse code
             textViewRandom.text = learn_alphabet[lastLetter].toString()
             textViewResult.text = getMorseCode(learn_alphabet[lastLetter])
@@ -318,7 +318,7 @@ class LearnActivity : AppCompatActivity() {
     private fun tutorialAnimation() {
         lastSignal = 0
 
-        textView.text = "Instrukcja"
+        textView.text = getString(R.string.learnInfoTextView)
         tutorialView.visibility = View.VISIBLE
         learnView.visibility = View.GONE
         info.visibility = View.INVISIBLE
@@ -338,7 +338,7 @@ class LearnActivity : AppCompatActivity() {
                 tutorialView.visibility = View.GONE
                 info.visibility = View.VISIBLE
                 isLearnTutorial = false
-                textView.text = "Przepisz literę"
+                textView.text = getString(R.string.learnTextViewLearn)
                 // Change text of textViewRandom and textViewResult to 'A' in Morse code
                 textViewRandom.text = learn_alphabet[lastLetter].toString()
                 textViewResult.text = getMorseCode(learn_alphabet[lastLetter])

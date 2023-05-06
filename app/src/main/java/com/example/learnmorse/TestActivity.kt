@@ -80,7 +80,7 @@ class TestActivity : AppCompatActivity() {
             tutorialView.visibility = View.GONE
             info.visibility = View.VISIBLE
             isTestTutorial = false
-            textView.text = "Odgadnij literę"
+            textView.text = getString(R.string.testTextView)
             textViewRandom.text = randomChar.toString()
         }
 
@@ -206,7 +206,7 @@ class TestActivity : AppCompatActivity() {
     private fun tutorialAnimation() {
         val tutorialTextView = findViewById<TextView>(R.id.tutorialTextView)
         val tutorialContent = findViewById<RelativeLayout>(R.id.tutorialContent)
-        textView.text = "Instrukcja"
+        textView.text = getString(R.string.testInfoTextView)
         tutorialView.visibility = View.VISIBLE
         testView.visibility = View.GONE
         info.visibility = View.INVISIBLE
@@ -214,12 +214,12 @@ class TestActivity : AppCompatActivity() {
         countDownTimer = object : CountDownTimer(12000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 when (((12000 - millisUntilFinished)*2)/1000/2.0) {
-                    0.0 -> tutorialTextView.text="Odgadnij literę używając przycisków na dole!"
+                    0.0 -> tutorialTextView.text=getString(R.string.testTutorial1)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
                     4.0 -> blinkAnimation(buttonDot)
                     4.5 -> blinkAnimation(buttonMinus)
-                    6.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    6.5 -> tutorialTextView.text=getString(R.string.testTutorial2)
                     10.0 -> blinkAnimation(tutorialContent)
                     11.0 -> blinkAnimation(tutorialContent)
                 }
@@ -230,7 +230,7 @@ class TestActivity : AppCompatActivity() {
                 tutorialView.visibility = View.GONE
                 info.visibility = View.VISIBLE
                 isTestTutorial = false
-                textView.text = "Odgadnij literę"
+                textView.text = getString(R.string.testTextView)
                 textViewRandom.text = randomChar.toString()
             }
         }.start()
