@@ -211,17 +211,17 @@ class TestActivity : AppCompatActivity() {
         testView.visibility = View.GONE
         info.visibility = View.INVISIBLE
 
-        countDownTimer = object : CountDownTimer(8000, 500) {
+        countDownTimer = object : CountDownTimer(12000, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                when (((8000 - millisUntilFinished)*2)/1000/2.0) {
+                when (((12000 - millisUntilFinished)*2)/1000/2.0) {
                     0.0 -> tutorialTextView.text="Odgadnij literę używając przycisków na dole!"
-                    2.0 -> blinkAnimation(buttonDot)
-                    2.5 -> blinkAnimation(buttonMinus)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
-                    4.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
-                    6.0 -> blinkAnimation(tutorialContent)
-                    6.5 -> blinkAnimation(tutorialContent)
+                    4.0 -> blinkAnimation(buttonDot)
+                    4.5 -> blinkAnimation(buttonMinus)
+                    6.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    10.0 -> blinkAnimation(tutorialContent)
+                    11.0 -> blinkAnimation(tutorialContent)
                 }
             }
 

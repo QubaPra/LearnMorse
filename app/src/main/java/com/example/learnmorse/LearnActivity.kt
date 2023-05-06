@@ -323,13 +323,13 @@ class LearnActivity : AppCompatActivity() {
         learnView.visibility = View.GONE
         info.visibility = View.INVISIBLE
 
-        countDownTimer = object : CountDownTimer(5000, 500) {
+        countDownTimer = object : CountDownTimer(6000, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                when (((5000 - millisUntilFinished)*2)/1000/2.0) {
-                    2.0 -> blinkAnimation(buttonDot)
-                    2.5 -> blinkAnimation(buttonMinus)
+                when (((6000 - millisUntilFinished)*2)/1000/2.0) {
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
+                    4.0 -> blinkAnimation(buttonDot)
+                    4.5 -> blinkAnimation(buttonMinus)
                 }
             }
 

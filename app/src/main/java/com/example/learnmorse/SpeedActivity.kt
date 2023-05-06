@@ -233,21 +233,21 @@ class SpeedActivity : AppCompatActivity() {
         tutorialView.visibility = View.VISIBLE
         speedLayout.visibility = View.GONE
 
-        animationTimer = object : CountDownTimer(14500, 500) {
+        animationTimer = object : CountDownTimer(26000, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                when (((14500 - millisUntilFinished)*2)/1000/2.0) {
+                when (((26000 - millisUntilFinished)*2)/1000/2.0) {
                     0.0 -> tutorialTextView.text="Odgadnij literę używając przycisków na dole!"
-                    2.0 -> blinkAnimation(buttonDot)
-                    2.5 -> blinkAnimation(buttonMinus)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
-                    4.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
-                    6.0 -> blinkAnimation(tutorialContent)
-                    6.5 -> blinkAnimation(tutorialContent)
-                    7.5 -> tutorialTextView.text="Masz 20 sekund na zdobycie jak największej ilości punktów!"
-                    9.0 -> blinkAnimation(timeBackground)
-                    9.5 -> blinkAnimation(textView)
-                    10.5 -> tutorialTextView.text="Za każdą poprawną odpowiedź zyskujesz punkt i czas, za błędną go tracisz!"
+                    4.0 -> blinkAnimation(buttonDot)
+                    4.5 -> blinkAnimation(buttonMinus)
+                    6.5 -> tutorialTextView.text="Aby sprawdzić poprawność sygnału naciśnij tutaj!"
+                    9.0 -> blinkAnimation(tutorialContent)
+                    10.0 -> blinkAnimation(tutorialContent)
+                    12.5 -> tutorialTextView.text="Masz 20 sekund na zdobycie jak największej ilości punktów!"
+                    15.0 -> blinkAnimation(timeBackground)
+                    16.0 -> blinkAnimation(textView)
+                    18.5 -> tutorialTextView.text="Za każdą poprawną odpowiedź zyskujesz punkt i czas, za błędną go tracisz!"
                 }
             }
 

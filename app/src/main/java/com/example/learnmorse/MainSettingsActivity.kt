@@ -112,6 +112,27 @@ class MainSettingsActivity : AppCompatActivity() {
 
             // Apply the changes
             editor.apply()
+            lightSpeed = sharedPreferences.getFloat("lightSpeed", 1.0F).toDouble()
+            learn_alphabet = sharedPreferences.getString("learn_alphabet", "ABCDEFGHIJKLMNOPRSTUWYZ")!!
+            train_alphabet = sharedPreferences.getString("train_alphabet", "ABCDEFGHIJKLMNOPRSTUWYZ")!!
+
+            last = sharedPreferences.getInt("last", 0)
+            reps = sharedPreferences.getInt("reps", 0)
+            tries = sharedPreferences.getInt("tries", 0)
+            learnMode = sharedPreferences.getBoolean("learnMode", true)
+            isTrainTutorial = sharedPreferences.getBoolean("isTrainTutorial", true)
+
+            lastLetter = sharedPreferences.getInt("lastLetter", 0)
+            isLearnTutorial = sharedPreferences.getBoolean("isLearnTutorial", true)
+            isMuted = sharedPreferences.getBoolean("isMuted", false)
+            isTestTutorial = sharedPreferences.getBoolean("isTestTutorial", true)
+            isSendTutorial = sharedPreferences.getBoolean("isSendTutorial", true)
+
+            isSpeedTutorial = sharedPreferences.getBoolean("isSpeedTutorial", true)
+            bestScore = sharedPreferences.getString("bestScore", "0 pkt")!!
+            score = sharedPreferences.getString("score", "0 pkt")!!
+
+            lastTrainSignal = sharedPreferences.getInt("lastTrainSignal", 0)
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
@@ -134,7 +155,7 @@ class MainSettingsActivity : AppCompatActivity() {
     }
     override fun onPause() {
         super.onPause()
-        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
         // Save values for lightSpeedSetting, learn_alphabet and train_alphabet to SharedPreferences
         val editor = sharedPreferences.edit()
         editor.putFloat("lightSpeed", lightSpeed.toFloat())

@@ -76,6 +76,8 @@ class SendAutoActivity : AppCompatActivity() {
             tutorialAnimation()
         }
 
+        textViewResult.text = sharedPreferences.getString("sendWiado", "")!!
+
         closeTutorial.setOnClickListener {
             countDownTimer.cancel()
             sendView.visibility = View.VISIBLE
@@ -165,13 +167,13 @@ class SendAutoActivity : AppCompatActivity() {
 
             if (textViewResult.text.toString().isNotEmpty() && !isSendTutorial) {
                 translate()
-                if (buttonStart.text.toString() == "Start!") {
+                if (buttonStart.text.toString() == "Nadaj!") {
                     buttonStart.text = "Stop!"
                     isSignal = true
                     lightTimer()
 
                 } else {
-                    buttonStart.text = "Start!"
+                    buttonStart.text = "Nadaj!"
                     lightOff()
                     countDownTimer.cancel()
                 }
@@ -228,7 +230,7 @@ class SendAutoActivity : AppCompatActivity() {
                             lightTimer()
                         } else {
                             isSignal = false
-                            buttonStart.text = "Start!"
+                            buttonStart.text = "Nadaj!"
                             countDownTimer.cancel()
                         }
                     }
@@ -290,26 +292,26 @@ class SendAutoActivity : AppCompatActivity() {
         sendView.visibility = View.GONE
         info.visibility = View.INVISIBLE
 
-        countDownTimer = object : CountDownTimer(29000, 500) {
+        countDownTimer = object : CountDownTimer(43000, 500) {
             override fun onTick(millisUntilFinished: Long) {
-                when (((29000 - millisUntilFinished)*2)/1000/2.0) {
+                when (((43000 - millisUntilFinished)*2)/1000/2.0) {
                     0.0 -> tutorialTextView.text="Nadaj wiadomość używając przycisków na dole!"
-                    2.0 -> blinkAnimation(buttonDot)
-                    2.5 -> blinkAnimation(buttonMinus)
                     3.0 -> blinkAnimation(buttonDot)
                     3.5 -> blinkAnimation(buttonMinus)
-                    4.5 -> tutorialTextView.text="Aby zatwierdzić literę kliknij raz kreskę pionową!"
-                    6.5 -> blinkAnimation(buttonSpace)
-                    8.0 -> tutorialTextView.text="Następne naciśniecie kreski pionowej spowoduje zakończenie wyrazu!"
-                    11.0 -> blinkAnimation(buttonSpace)
-                    12.5 -> tutorialTextView.text="Trzecie naciśniecie kreski pionowej spowoduje zakończenie zdania!"
-                    15.0 -> blinkAnimation(buttonSpace)
-                    17.0 -> tutorialTextView.text="Naciśnij backspace aby zmazać ostatni znak!"
-                    19.0 -> blinkAnimation(buttonBack)
-                    21.0 -> tutorialTextView.text="Przytrzymaj backspace aby zmazać całą wiadomość!"
-                    23.0 -> longBlinkAnimation(buttonBack)
-                    25.5 -> tutorialTextView.text="Naciśnij Start! aby nadać wiadomość latarką!"
-                    27.5 -> blinkAnimation(buttonStart)
+                    4.0 -> blinkAnimation(buttonDot)
+                    4.5 -> blinkAnimation(buttonMinus)
+                    6.5 -> tutorialTextView.text="Aby zatwierdzić literę kliknij raz kreskę pionową!"
+                    10.5 -> blinkAnimation(buttonSpace)
+                    12.0 -> tutorialTextView.text="Następne naciśniecie kreski pionowej spowoduje zakończenie wyrazu!"
+                    16.0 -> blinkAnimation(buttonSpace)
+                    18.0 -> tutorialTextView.text="Trzecie naciśniecie kreski pionowej spowoduje zakończenie zdania!"
+                    22.0 -> blinkAnimation(buttonSpace)
+                    24.0 -> tutorialTextView.text="Naciśnij backspace aby zmazać ostatni znak!"
+                    28.0 -> blinkAnimation(buttonBack)
+                    30.0 -> tutorialTextView.text="Przytrzymaj backspace aby zmazać całą wiadomość!"
+                    34.0 -> longBlinkAnimation(buttonBack)
+                    36.0 -> tutorialTextView.text="Naciśnij Nadaj! aby nadać wiadomość latarką!"
+                    40.0 -> blinkAnimation(buttonStart)
                 }
             }
 
@@ -330,6 +332,7 @@ class SendAutoActivity : AppCompatActivity() {
         // Save values for lightSpeedSetting, learn_alphabet and train_alphabet to SharedPreferences
         val editor = sharedPreferences.edit()
         editor.putBoolean("isSendTutorial", isSendTutorial)
+        editor.putString("sendWiado", textViewResult.text.toString())
         editor.apply()
     }
 }
