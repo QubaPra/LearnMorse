@@ -1,5 +1,7 @@
 package com.example.learnmorse
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -33,6 +35,8 @@ class TestActivity : AppCompatActivity() {
 
     private var randomChar = alphabet.random()
     private var morseCode = getMorseCode(randomChar)
+
+    lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var countDownTimer: CountDownTimer
 
@@ -231,5 +235,13 @@ class TestActivity : AppCompatActivity() {
             }
         }.start()
 
+    }
+    override fun onPause() {
+        super.onPause()
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        // Save values for lightSpeedSetting, learn_alphabet and train_alphabet to SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isTestTutorial", isTestTutorial)
+        editor.apply()
     }
 }

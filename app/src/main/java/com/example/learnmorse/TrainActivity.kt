@@ -1,5 +1,7 @@
 package com.example.learnmorse
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -27,6 +29,8 @@ var isTrainTutorial = true
 
 class TrainActivity : AppCompatActivity() {
 
+    lateinit var sharedPreferences: SharedPreferences
+
     private lateinit var buttonDot: Button
     private lateinit var buttonMinus: Button
     private lateinit var textViewResult: TextView
@@ -48,6 +52,10 @@ class TrainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_train)
+
+        // Get SharedPreferences instance
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
 
         val green = ContextCompat.getColor(this, R.color.accent1)
         val red = ContextCompat.getColor(this, R.color.accent2)
@@ -247,10 +255,6 @@ class TrainActivity : AppCompatActivity() {
         }
 
         layout.setOnClickListener {
-            println(tries)
-            println(reps)
-            println(last)
-            println(train_alphabet[last])
             if (!learnMode && !isTrainTutorial) {
                 checkResult()
             }
@@ -501,6 +505,16 @@ class TrainActivity : AppCompatActivity() {
             }
         }.start()
 
+    }
+    override fun onPause() {
+        super.onPause()
+        val editor = sharedPreferences.edit()
+        editor.putInt("last", last)
+        editor.putInt("reps", reps)
+        editor.putInt("tries", tries)
+        editor.putBoolean("learnMode", learnMode)
+        editor.putBoolean("isTrainTutorial", isTrainTutorial)
+        editor.apply()
     }
 
 }

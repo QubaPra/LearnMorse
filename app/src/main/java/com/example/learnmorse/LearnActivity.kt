@@ -1,5 +1,7 @@
 package com.example.learnmorse
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,9 +41,15 @@ class LearnActivity : AppCompatActivity() {
 
     private lateinit var countDownTimer: CountDownTimer
 
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_learn)
+
+        // Get SharedPreferences instance
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
 
         val green = ContextCompat.getColor(this, R.color.accent1)
         val red = ContextCompat.getColor(this, R.color.accent2)
@@ -337,6 +345,15 @@ class LearnActivity : AppCompatActivity() {
             }
         }.start()
 
+    }
+    override fun onPause() {
+        super.onPause()
+        // Save values for lightSpeedSetting, learn_alphabet and train_alphabet to SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putInt("lastLetter", lastLetter)
+        editor.putBoolean("isLearnTutorial", isLearnTutorial)
+        editor.putBoolean("isMuted", isMuted)
+        editor.apply()
     }
 
 }

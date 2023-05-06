@@ -1,6 +1,7 @@
 package com.example.learnmorse
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraManager
 import android.os.Bundle
@@ -34,9 +35,15 @@ class SendAutoActivity : AppCompatActivity() {
     private lateinit var tutorialView: ConstraintLayout
     private lateinit var sendView: ConstraintLayout
     private lateinit var info: ImageView
+
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_auto)
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
 
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
@@ -316,5 +323,13 @@ class SendAutoActivity : AppCompatActivity() {
             }
         }.start()
 
+    }
+    override fun onPause() {
+        super.onPause()
+
+        // Save values for lightSpeedSetting, learn_alphabet and train_alphabet to SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("isSendTutorial", isSendTutorial)
+        editor.apply()
     }
 }

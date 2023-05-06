@@ -1,6 +1,8 @@
 package com.example.learnmorse
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -41,10 +43,14 @@ class SpeedActivity : AppCompatActivity() {
     private var addTimeAmount: Long = 1500
     private var subtractTimeAmount: Long = 500
 
+    lateinit var sharedPreferences: SharedPreferences
+
     private var result = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_speed)
+
+        sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
         timeLeft= 20000
         addTimeAmount = 1500
@@ -272,5 +278,15 @@ class SpeedActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
         finish()
+    }
+    override fun onPause() {
+        super.onPause()
+
+        // Save values for lightSpeedSetting, learn_alphabet and train_alphabet to SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putString("score", score)
+        editor.putString("bestScore", bestScore)
+        editor.putBoolean("isSpeedTutorial", isSpeedTutorial)
+        editor.apply()
     }
 }
