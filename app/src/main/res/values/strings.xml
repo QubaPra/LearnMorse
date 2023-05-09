@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Nauka Morsa</string>
+    <string name="app_name">Morsujemy</string>
 
     <string name="sendName">Nadaj</string>
     <string name="sendTextView">Wiadomość</string>
@@ -23,7 +23,7 @@
     <string name="infoName">Info</string>
 
     <string name="speedTutorial1">Odgadnij literę używając przycisków na dole!</string>
-    <string name="speedTutorial2">Aby sprawdzić poprawność sygnału naciśnij tutaj!</string>
+    <string name="speedTutorial2">Aby sprawdzić poprawność sygnału naciśnij literę!</string>
     <string name="speedTutorial3">Masz 20 sekund na zdobycie jak największej ilości punktów!</string>
     <string name="speedTutorial4">Za każdą poprawną odpowiedź zyskujesz punkt i czas, za błędną go tracisz!</string>
     <string name="speedTimeEnd">Koniec!</string>
@@ -32,11 +32,11 @@
     <string name="trainTextViewLearn">Przepisz literę</string>
     <string name="trainTutorial1">Przepisz 4 litery używając przycisków na dole!</string>
     <string name="trainTutorial2">Następnie odgadnij te litery używając przycisków na dole!</string>
-    <string name="trainTutorial3">Aby sprawdzić poprawność sygnału naciśnij tutaj!</string>
+    <string name="trainTutorial3">Aby sprawdzić poprawność sygnału naciśnij literę!</string>
     <string name="trainInfoTextView">Instrukcja</string>
 
     <string name="testTutorial1">Odgadnij literę używając przycisków na dole!</string>
-    <string name="testTutorial2">Aby sprawdzić poprawność sygnału naciśnij tutaj!</string>
+    <string name="testTutorial2">Aby sprawdzić poprawność sygnału naciśnij literę!</string>
     <string name="testInfoTextView">Instrukcja</string>
     <string name="testTextView">Odgadnij literę</string>
 

@@ -34,6 +34,7 @@ class SpeedActivity : AppCompatActivity() {
     private lateinit var closeTutorial: ImageView
 
     private var randomChar = alphabet.random()
+    private var lastChar = randomChar
     private var morseCode = getMorseCode(randomChar)
 
     private lateinit var countdownTextView: TextView
@@ -113,10 +114,18 @@ class SpeedActivity : AppCompatActivity() {
         }
 
         layout.setOnClickListener {
-            if (!isSpeedTutorial)
+            if (!isSpeedTutorial && textViewRandom.currentTextColor == getColor(R.color.white))
             {
                 checkResult()
             }
+        }
+
+        layout.setOnLongClickListener {
+            if (!isSpeedTutorial && textViewRandom.currentTextColor == getColor(R.color.white))
+            {
+                textViewResult.text = ""
+            }
+            true
         }
     }
 
@@ -138,7 +147,11 @@ class SpeedActivity : AppCompatActivity() {
             layout.isClickable = false
             Handler(Looper.getMainLooper()).postDelayed({
                 textViewResult.text = ""
+                lastChar = randomChar
                 randomChar = alphabet.random()
+                while (randomChar == lastChar) {
+                    randomChar = alphabet.random()
+                }
                 textViewRandom.text = randomChar.toString()
 
                 textViewRandom.setTextColor(getColor(R.color.white))

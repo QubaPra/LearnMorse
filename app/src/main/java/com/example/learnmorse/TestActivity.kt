@@ -12,6 +12,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isInvisible
 
 var isTestTutorial = true
 
@@ -34,6 +35,7 @@ class TestActivity : AppCompatActivity() {
     private val mediaQueue: MutableList<MediaPlayer> = mutableListOf()
 
     private var randomChar = alphabet.random()
+    private var lastChar = randomChar
     private var morseCode = getMorseCode(randomChar)
 
     lateinit var sharedPreferences: SharedPreferences
@@ -134,12 +136,19 @@ class TestActivity : AppCompatActivity() {
 
             }
 
-            layout.setOnClickListener {
-                if (!isTestTutorial)
-                {
-                    checkResult()
-                }
+        layout.setOnClickListener {
+            if (!isTestTutorial && textViewRandom.currentTextColor == getColor(R.color.white))
+            {
+                checkResult()
             }
+        }
+        layout.setOnLongClickListener {
+            if (!isTestTutorial && textViewRandom.currentTextColor == getColor(R.color.white))
+            {
+                textViewResult.text = ""
+            }
+            true
+        }
 
     }
 
@@ -160,13 +169,18 @@ class TestActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 textViewResult.text = ""
+                lastChar = randomChar
                 randomChar = alphabet.random()
+                while (randomChar == lastChar) {
+                    randomChar = alphabet.random()
+                }
                 textViewRandom.text = randomChar.toString()
                 textViewRandom.setTextColor(getColor(R.color.white))
                 morseCode = getMorseCode(randomChar)
                 buttonMinus.isClickable = true
                 buttonDot.isClickable = true
                 layout.isClickable = true
+                countDownTimer.cancel()
             }
         }.start()
     }

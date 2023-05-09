@@ -255,10 +255,17 @@ class TrainActivity : AppCompatActivity() {
         }
 
         layout.setOnClickListener {
-            if (!learnMode && !isTrainTutorial) {
+            if (!learnMode && !isTrainTutorial && textViewRandom.currentTextColor == getColor(R.color.white)) {
                 checkResult()
             }
 
+        }
+        layout.setOnLongClickListener {
+            if (!learnMode && !isTrainTutorial && textViewRandom.currentTextColor == getColor(R.color.white))
+            {
+                textViewResult.text = ""
+            }
+            true
         }
 
         buttonMinus.setOnClickListener {

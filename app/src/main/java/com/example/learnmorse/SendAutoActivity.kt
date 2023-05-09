@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isInvisible
 
 var isSendTutorial = true
 
@@ -35,6 +36,7 @@ class SendAutoActivity : AppCompatActivity() {
     private lateinit var tutorialView: ConstraintLayout
     private lateinit var sendView: ConstraintLayout
     private lateinit var info: ImageView
+    private lateinit var button_backspace_image: ImageView
 
     lateinit var sharedPreferences: SharedPreferences
 
@@ -71,12 +73,21 @@ class SendAutoActivity : AppCompatActivity() {
         closeTutorial = findViewById(R.id.closeTutorial)
         tutorialView = findViewById(R.id.tutorial)
         sendView = findViewById(R.id.send)
+        button_backspace_image = findViewById(R.id.button_backspace_image)
+        buttonStart.isInvisible = true
+        buttonBack.isInvisible = true
+        button_backspace_image.isInvisible = true
 
         if (isSendTutorial){
             tutorialAnimation()
         }
 
         textViewResult.text = sharedPreferences.getString("sendWiado", "")!!
+        if (textViewResult.text.toString().isNotEmpty()) {
+            buttonStart.isInvisible = false
+            buttonBack.isInvisible = false
+            button_backspace_image.isInvisible = false
+        }
 
         closeTutorial.setOnClickListener {
             countDownTimer.cancel()
@@ -85,6 +96,11 @@ class SendAutoActivity : AppCompatActivity() {
             info.visibility = View.VISIBLE
             isSendTutorial = false
             textView.text = getString(R.string.sendTextView)
+            if (textViewResult.text.toString().isEmpty()) {
+                buttonStart.isInvisible = true
+                buttonBack.isInvisible = true
+                button_backspace_image.isInvisible = true
+            }
         }
 
         info.setOnClickListener {
@@ -95,16 +111,24 @@ class SendAutoActivity : AppCompatActivity() {
         }
 
         buttonMinus.setOnClickListener {
+            buttonStart.isInvisible = false
+            buttonBack.isInvisible = false
+            button_backspace_image.isInvisible = false
             if (textViewResult.text.toString().substringAfterLast(" ").length < 4 && !isSendTutorial) {
                 textViewResult.append("—")
             }
         }
         buttonDot.setOnClickListener {
+            buttonStart.isInvisible = false
+            buttonBack.isInvisible = false
+            button_backspace_image.isInvisible = false
             if (textViewResult.text.toString().substringAfterLast(" ").length < 4 && !isSendTutorial) {
                 textViewResult.append("•")
             }
         }
         buttonSpace.setOnClickListener {
+            buttonBack.isInvisible = false
+            button_backspace_image.isInvisible = false
             if (!isSendTutorial) {
                 var text = textViewResult.text.toString()
                 if (text.isNotEmpty()) {
@@ -150,6 +174,11 @@ class SendAutoActivity : AppCompatActivity() {
                     } else if (text.isNotEmpty()) {
                         textViewResult.text = text.substring(0, text.length - 1)
                     }
+                    if (textViewResult.text.toString().isEmpty()) {
+                        buttonStart.isInvisible = true
+                        buttonBack.isInvisible = true
+                        button_backspace_image.isInvisible = true
+                    }
                 }
                 if (text.length > 3 && text.substring(text.length - 3, text.length - 1) == ". ") {
                     textViewResult.text = text.substring(0, text.length - 3) + "  "
@@ -158,13 +187,18 @@ class SendAutoActivity : AppCompatActivity() {
 
         }
         buttonBack.setOnLongClickListener {
+
             if (!isSendTutorial) {
+                buttonStart.isInvisible = true
+                buttonBack.isInvisible = true
+                button_backspace_image.isInvisible = true
                 textViewResult.text = ""
             }
             true
         }
         buttonStart.setOnClickListener {
 
+            buttonSpace.performClick()
             if (textViewResult.text.toString().isNotEmpty() && !isSendTutorial) {
                 translate()
                 if (buttonStart.text.toString() == getString(R.string.sendButton)) {
@@ -282,6 +316,9 @@ class SendAutoActivity : AppCompatActivity() {
     }
 
     private fun tutorialAnimation() {
+        buttonStart.isInvisible = false
+        buttonBack.isInvisible = false
+        button_backspace_image.isInvisible = false
         if (isSignal) {
             lightOff()
             countDownTimer.cancel()
@@ -321,7 +358,11 @@ class SendAutoActivity : AppCompatActivity() {
                 info.visibility = View.VISIBLE
                 isSendTutorial = false
                 textView.text = getString(R.string.sendTextView)
-
+                if (textViewResult.text.toString().isEmpty()) {
+                    buttonStart.isInvisible = true
+                    buttonBack.isInvisible = true
+                    button_backspace_image.isInvisible = true
+                }
             }
         }.start()
 

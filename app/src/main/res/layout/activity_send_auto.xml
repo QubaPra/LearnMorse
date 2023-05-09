@@ -232,6 +232,7 @@
                 app:cornerRadius="19dp" />
 
             <ImageView
+                android:id="@+id/button_backspace_image"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
