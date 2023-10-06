@@ -1,3 +1,4 @@
+
 # LearnMorse
 This android aplication helps you **learn morse code**. I used **Figma** for designing UI and Android Studio **Kotlin** to run it. App is only in Polish language now.
 
@@ -9,3 +10,8 @@ This android aplication helps you **learn morse code**. I used **Figma** for des
  - **Send mode** - transmit your coded message by flashlight
  - **Info** - basic informations about app and morse code
  - **Settings** - change letter order in each mode, flashlight speed, reset your progress
+
+### App UI design
+|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/main.png)|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/info.png)|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/sendinfo.png)|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/send.png)|
+|--|--|--|--|
+|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/speedinfo.png)|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/speed.png)|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/speedresult.png)|![](https://github.com/QubaPra/LearnMorse/blob/main/UI%20Figma/testinfo.png)|
